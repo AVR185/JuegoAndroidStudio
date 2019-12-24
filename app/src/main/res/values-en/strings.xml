@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TITLE GAME</string>
+    <string name="nueva_partida">NEW GAME</string>
+    <string name="seleccion_nivel">SELECT LEVEL</string>
+    <string name="top">TOP 10</string>
+    <string name="ajustes">SETTINGS</string>
+    <string name="creditos">CREDITS</string>
+    <string name="descripcion1">red circle</string>
+    <string name="descripcion2">blue circle</string>
+    <string name="boton_creditos">authority icon</string>
+    <string name="boton_ajustes">settings icon</string>
+    <string name="boton_home">home icon</string>
+
+    <!-- Titulos del Tab -->
+    <string name="juego">GAME</string>
+    <string name="niveles">LEVELS</string>
+    <string name="ranking">RANKING</string>
+
+    <!-- Array de Autores -->
+    <array name="autores">
+        <item>Álvaro del Río</item>
+        <item>Álvaro Santillana</item>
+        <item>Álvaro Velasco</item>
+    </array>
+
+    <!-- Texto Activity FragmentCreditos -->
+    <string name="autores">Authors</string>
+    <string name="librerias">Libraries</string>
+    <string name="fondo_animado">Animated Background:</string>
+    <string name="autor_fondo">Yaroslav Mytkalyk</string>
+    <string name="git_fondo">Github: https://github.com/Doctoror</string>
+    <string name="musica">Music:</string>
+    <string name="autor_musica">Name</string>
+    <string name="url_musica">URL</string>
+
+    <!-- Texto Activity FragmentAjustes -->
+    <string name="FPS">FPS:</string>
+    <string name="volumen">Volume</string>
+    <string name="efectos_fx">FX Effects:</string>
+    <string name="valor_fps">30 FPS</string>
+    <string name="valor_musica">100%</string>
+    <string name="valor_fx">100%</string>
+
+    <!-- Texto Dialog Fragment -->
+    <string name="linkedin">Linkedin:</string>
+    <string name="github">GitHub:</string>
+    <string name="aceptar">OK</string>
+    <string name="icono_github">GitHub icon</string>
+    <string name="icono_linkedin">LikedIn icon</string>
+
+</resources>

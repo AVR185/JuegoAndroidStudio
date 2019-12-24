@@ -3,6 +3,9 @@ package com.juego.alvaros;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.widget.SeekBar;
+
+import com.juego.alvaros.vistas.FragmentAjustes;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
@@ -10,9 +13,11 @@ import android.view.SurfaceHolder;
  */
 public class BucleJuego extends Thread {
     //Atributos de la clase
-    private final static int MAX_FPS = 30; //Frames por segundo deseados
+    //private final static int MAX_FPS = 30; //Frames por segundo deseados
+    private static int MAX_FPS;
     private final static int MAX_FRAMES_SALTATOS = 5; //Maximo numero de frames que saltaremos
-    private final static int TIEMPO_FRAME = 1000 / MAX_FPS; //El periodo de frames
+    //private final static int TIEMPO_FRAME = 1000 / MAX_FPS; //El periodo de frames
+    private static int TIEMPO_FRAME;
     private Juego juego;
     private boolean juegoEnEjecucion = true;
     private static final String TAG = Juego.class.getSimpleName();
@@ -22,6 +27,11 @@ public class BucleJuego extends Thread {
     BucleJuego(SurfaceHolder surfaceHolder, Juego juego){
         this.juego = juego;
         this.surfaceHolder = surfaceHolder;
+
+        //Comprobamos si el usuario ha modificado los FPS e inicializamos las variables
+        SeekBar seekBar = FragmentAjustes.getSeekBarFps();
+        MAX_FPS = (seekBar!=null)?seekBar.getProgress():30;
+        TIEMPO_FRAME = 1000 / MAX_FPS;
     }
 
     /**
@@ -31,6 +41,7 @@ public class BucleJuego extends Thread {
     public void run(){
         //Variables
         Log.d(TAG, "Comienza el bucle del juego");
+        Log.d(TAG, "FPS = " + MAX_FPS);
         Canvas canvas;
         long tiempoComienzo; //Tiempo en el que la iteracion del bucle comenzó
         long tiempoDiferencia; //Tiempo que duró el ciclo

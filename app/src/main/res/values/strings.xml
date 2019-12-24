@@ -1,3 +1,51 @@
 <resources>
-    <string name="app_name">Juego Android</string>
+    <string name="app_name">TITULO JUEGO</string>
+    <string name="nueva_partida">NUEVA PARTIDA</string>
+    <string name="seleccion_nivel">SELECCIÓN DE NIVEL</string>
+    <string name="top">TOP 10</string>
+    <string name="ajustes">AJUSTES</string>
+    <string name="creditos">CRÉDITOS</string>
+    <string name="descripcion1">ciruculo rojo</string>
+    <string name="descripcion2">ciruculo azul</string>
+    <string name="boton_creditos">icono créditos</string>
+    <string name="boton_ajustes">icono ajustes</string>
+    <string name="boton_home">icono menu principal</string>
+
+    <!-- Titulos del Tab -->
+    <string name="juego">JUEGO</string>
+    <string name="niveles">NIVELES</string>
+    <string name="ranking">RANKING</string>
+
+    <!-- Array de Autores -->
+    <array name="autores">
+        <item>Álvaro del Río</item>
+        <item>Álvaro Santillana</item>
+        <item>Álvaro Velasco</item>
+    </array>
+
+    <!-- Texto Activity FragmentCreditos -->
+    <string name="autores">Autores</string>
+    <string name="librerias">Librerias</string>
+    <string name="fondo_animado">Fondo Animado:</string>
+    <string name="autor_fondo">Yaroslav Mytkalyk</string>
+    <string name="git_fondo">Github: https://github.com/Doctoror</string>
+    <string name="musica">Music:</string>
+    <string name="autor_musica">Name</string>
+    <string name="url_musica">URL</string>
+
+    <!-- Texto Activity FragmentAjustes -->
+    <string name="FPS">FPS:</string>
+    <string name="volumen">Volumen</string>
+    <string name="efectos_fx">Efectos FX:</string>
+    <string name="valor_fps">30 FPS</string>
+    <string name="valor_musica">100%</string>
+    <string name="valor_fx">100%</string>
+
+    <!-- Texto Dialog Fragment -->
+    <string name="linkedin">Linkedin:</string>
+    <string name="github">GitHub:</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="icono_github">Icono GitHub</string>
+    <string name="icono_linkedin">Icono LikedIn</string>
+
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape= "oval">
+    <!--<solid
+        android:color="#FD0202" />-->
+
+    <gradient
+        android:type="radial"
+        android:startColor="#FAA1A1"
+        android:endColor="#C00000"
+        android:centerX="0.3"
+        android:centerY="0.3"
+        android:gradientRadius="68%p"
+        />
+
+    <size
+        android:width="82dp"
+        android:height="82dp" />
+    <!-- https://android.jlelse.eu/android-shape-drawables-tutorial-17fbece6fef5 -->
+</shape>

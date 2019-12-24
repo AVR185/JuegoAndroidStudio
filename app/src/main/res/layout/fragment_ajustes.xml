@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vistas.FragmentCreditos">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/ajustes"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="76dp"
+        android:text="@string/FPS"
+        android:textColor="@color/colorEtiqueta1"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/idSeekBarFps"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/idSeekBarFps"
+        android:layout_width="200dp"
+        android:layout_height="16dp"
+        android:indeterminate="false"
+        android:max="75"
+        android:min="15"
+        android:progress="30"
+        android:progressBackgroundTint="@color/colorAccent"
+        android:progressTint="@color/colorEtiqueta1"
+        android:thumbTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/idSeekBarMusica"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="@string/volumen"
+        android:textColor="@color/colorContraste"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idSeekBarFps" />
+
+    <SeekBar
+        android:id="@+id/idSeekBarMusica"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:progress="100"
+        android:progressBackgroundTint="@color/colorAccent"
+        android:progressTint="@color/colorEtiqueta2"
+        android:thumbTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="@string/efectos_fx"
+        android:textColor="@color/colorEtiqueta2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/idSeekBarFx"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <SeekBar
+        android:id="@+id/idSeekBarFx"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:progress="100"
+        android:progressBackgroundTint="@color/colorAccent"
+        android:progressTint="@color/colorEtiqueta2"
+        android:thumbTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/idSeekBarMusica"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+    <ImageButton
+        android:id="@+id/idButonHomeAjustes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/boton_home"
+        android:src="@drawable/ic_home"
+        android:tint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/musica"
+        android:textColor="@color/colorEtiqueta2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/idSeekBarMusica"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/idTextViewFps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/valor_fps"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/idSeekBarFps"
+        app:layout_constraintEnd_toEndOf="@+id/idSeekBarFps"
+        app:layout_constraintStart_toStartOf="@+id/idSeekBarFps" />
+
+    <TextView
+        android:id="@+id/idTextViewMusica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/valor_musica"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/idSeekBarMusica"
+        app:layout_constraintEnd_toEndOf="@+id/idSeekBarMusica"
+        app:layout_constraintStart_toStartOf="@+id/idSeekBarMusica" />
+
+    <TextView
+        android:id="@+id/idTextViewFx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/valor_fx"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/idSeekBarFx"
+        app:layout_constraintEnd_toEndOf="@+id/idSeekBarFx"
+        app:layout_constraintStart_toStartOf="@+id/idSeekBarFx" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
