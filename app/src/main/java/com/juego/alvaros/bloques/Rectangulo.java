@@ -34,7 +34,7 @@ public abstract class Rectangulo {
     public void CalcularCoordenadas(){
         double x;
         x = Math.random();
-        coordenada_x =(int) Math.floor(anchoPantalla*x);
+        coordenada_x =(int) Math.floor((anchoPantalla-290)*x);
         //coordenada_x = 50;
         coordenada_y = 1;
     }
