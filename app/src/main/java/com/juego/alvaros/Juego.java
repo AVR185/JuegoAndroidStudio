@@ -1,10 +1,16 @@
 package com.juego.alvaros;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import com.juego.alvaros.bloques.Rectangulo;
+import com.juego.alvaros.bloques.RectanguloX;
+import java.util.ArrayList;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
@@ -15,12 +21,23 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
     private BucleJuego bucle;
     private static final String TAG = Juego.class.getSimpleName();
+    private Paint myPaint;
+
+    //Bloques
+    private static Bitmap rectangulo;
+    //numero enemigos por minuto
+    private int rectangulo_minuto =50;
+    //frames que restan hasta generar nuevo enemigo
+    private int frames_new_rectangulo = 0;
+    //lista de enemigos
+    private ArrayList<Rectangulo> listaRectangulos = new ArrayList<>();
 
     //Constructor de la clase
     public Juego(Context context) {
         super(context);
         holder = getHolder();
         holder.addCallback(this);
+        cargaRectangulos();
     }
 
     //Metodos que hay que implementar de la interfaz
@@ -51,14 +68,26 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
      * nuevos estados y dejando listo el sistema para un repintado.
      */
     public void actualizar(){
-
+        if(frames_new_rectangulo==0){
+            crearRectangulo();
+            frames_new_rectangulo = BucleJuego.getFPS()*60/rectangulo_minuto;
+        }
+        frames_new_rectangulo--;
     }
 
     /**
      * Metodo que dibuja el siguiente paso de la animacion correspondiente
      */
     public void renderizar(Canvas canvas){
-
+        if(canvas!=null){
+            canvas.drawColor(255255000);
+            myPaint = new Paint();
+            myPaint.setStyle(Paint.Style.STROKE);
+            for(Rectangulo r : listaRectangulos){
+                r.Dibujar(canvas, myPaint);
+                r.ActualizarCoordenadas();
+            }
+        }
     }
 
     //No lo implementa el libro pero Android Studio te obliga
@@ -86,5 +115,19 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
                 //tratar posible fallo al finalizar el bucle
             }
         }
+    }
+
+    public void cargaRectangulos(){
+        frames_new_rectangulo = BucleJuego.getFPS() *60/rectangulo_minuto;
+        rectangulo = BitmapFactory.decodeResource(
+                getResources(), R.drawable.rectangulo);
+    }
+
+    public void crearRectangulo(){
+        listaRectangulos.add(new RectanguloX(this));
+    }
+
+    public static Bitmap getRectangulo(){
+        return rectangulo;
     }
 }

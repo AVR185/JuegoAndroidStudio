@@ -99,4 +99,8 @@ public class BucleJuego extends Thread {
     public void fin(){
         juegoEnEjecucion = false;
     }
+
+    public static int getFPS(){
+        return MAX_FPS;
+    }
 }

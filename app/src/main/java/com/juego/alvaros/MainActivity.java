@@ -29,15 +29,15 @@ import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 public class MainActivity extends AppCompatActivity {
     //Atributos
     private final ParticlesDrawable mDrawable = new ParticlesDrawable(); //objeto del tipo ParticleDrawable para el fondo
-    /**
-     * para gestionar cada uno de los fragmentos
-     * */
+    // para gestionar cada uno de los fragmentos
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    /**
-     * Para alojar el contenido de cada fragment
-     * */
+    // Para alojar el contenido de cada fragment
     private ViewPager mViewPager;
     private static TabLayout tabLayout;
+
+    //Medidas de la pantalla
+    private static int ancho;
+    private static int alto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
         //Medidas del dispositivo
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int ancho = metrics.widthPixels; // ancho absoluto en pixels
-        int alto = metrics.heightPixels; // alto absoluto en pixels
+        ancho = metrics.widthPixels; // ancho absoluto en pixels
+        alto = metrics.heightPixels; // alto absoluto en pixels
 
         //Animacion circulo azul
         Path path = new Path();
@@ -240,5 +240,13 @@ public class MainActivity extends AppCompatActivity {
             }
             return titulo;
         }
+    }
+
+    public static int getAlto(){
+        return alto;
+    }
+
+    public static int getAncho(){
+        return ancho;
     }
 }
