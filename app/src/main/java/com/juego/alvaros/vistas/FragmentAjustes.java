@@ -13,6 +13,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.juego.alvaros.MainActivity;
 import com.juego.alvaros.R;
 
+import static android.media.ToneGenerator.MAX_VOLUME;
+
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
  * @version 1.0 23/12/2019
@@ -67,6 +69,10 @@ public class FragmentAjustes extends Fragment implements SeekBar.OnSeekBarChange
             case R.id.idSeekBarMusica:
                 valor = view.findViewById(R.id.idTextViewMusica);
                 valor.setText(String.format("%d%%", progress));
+                //Controlamos el volumen del menu principal
+                float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
+                MainActivity.getmPlayer().setVolume(volume,volume);
+
                 break;
             case R.id.idSeekBarFx:
                 valor = view.findViewById(R.id.idTextViewFx);

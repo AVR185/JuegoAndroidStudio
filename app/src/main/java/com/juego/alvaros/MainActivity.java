@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ObjectAnimator;
 import android.graphics.Path;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     // Para alojar el contenido de cada fragment
     private ViewPager mViewPager;
     private static TabLayout tabLayout;
+    //MusicaIntro
+    private static MediaPlayer mPlayer;
 
     //Medidas de la pantalla
     private static int ancho;
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Construimos el TabLayout
         inicializarTab();
+        //Música del Menu
+        introMusica();
     }
 
     //============ Eventos =============
@@ -166,6 +171,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Método que implementa la musica del menu
+     */
+
+    public void introMusica(){
+        mPlayer = MediaPlayer.create(this,R.raw.intromenu);
+
+        mPlayer.start();
+    }
+
+    /**
      * Método que responde al evento de hacer click en las ImageButton del menu principal
      * @param view
      */
@@ -185,6 +200,11 @@ public class MainActivity extends AppCompatActivity {
     //Getter
     public static TabLayout getTabLayout(){
         return tabLayout;
+    }
+
+    //Getter para la el elemento de musica de la intro..
+    public static MediaPlayer getmPlayer() {
+        return mPlayer;
     }
 
     /**
