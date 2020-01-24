@@ -20,7 +20,7 @@ public class DialogInfoAutor extends DialogFragment {
     //Atributos
     private String[] nombres = {"Álvaro del Río", "Álvaro Santillana", "Álvaro Velasco"};
     private String[] linkedin = {"url del rio", "url Santillana", "https://www.linkedin.com/in/alvaro-velasco/"};
-    private String[] github = {"url del Río", "url Santillana", "https://github.com/AVR185"};
+    private String[] github = {"https://github.com/alvarorio97", "https://github.com/AlvaroSanCer", "https://github.com/AVR185"};
 
     @NonNull
     @Override

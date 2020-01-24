@@ -17,7 +17,7 @@ public abstract class Rectangulo {
         Eje y Abajo     1 Arriba    1
         En ambos ejes 0 indica estatico
      */
-    public int direccion_x;
+    public int direccion_x = 1;
     public int direccion_y = 1;
 
     public int velocidad =10;
@@ -36,7 +36,7 @@ public abstract class Rectangulo {
         x = Math.random();
         coordenada_x =(int) Math.floor((anchoPantalla-290)*x);
         //coordenada_x = 50;
-        coordenada_y = 1;
+        coordenada_y = 0;
     }
 
 

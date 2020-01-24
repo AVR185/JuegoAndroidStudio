@@ -10,7 +10,7 @@ public class RectanguloX extends Rectangulo {
 
     public RectanguloX(Juego j){
         super(j);
-        setDireccion_x((Math.random()>=0.5)? 1:-1);
+        this.setDireccion_x((Math.random()>=0.5)? 1:-1);
     }
 
     public void ActualizarCoordenadas(){
