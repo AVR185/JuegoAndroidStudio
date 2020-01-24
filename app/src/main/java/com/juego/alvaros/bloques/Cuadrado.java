@@ -21,4 +21,12 @@ public class Cuadrado extends Rectangulo {
     public void Dibujar(Canvas c, Paint p){
         c.drawBitmap(Juego.getCuadrado(),coordenada_x,coordenada_y,p);
     }
+
+    @Override
+    public void CalcularCoordenadas() {
+        double x;
+        x = Math.random();
+        coordenada_x =(int) Math.floor((anchoPantalla-80)*x);
+        coordenada_y = 0;
+    }
 }

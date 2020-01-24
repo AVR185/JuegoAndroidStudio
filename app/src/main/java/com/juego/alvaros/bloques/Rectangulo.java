@@ -26,30 +26,24 @@ public abstract class Rectangulo {
     public int anchoPantalla = MainActivity.getAncho();
     public int altoPantalla = MainActivity.getAlto();
 
+    //Constructor
     public Rectangulo(Juego j){
         juego = j;
         CalcularCoordenadas();
     }
-    //Determina la posicion x en la que aparece
-    public void CalcularCoordenadas(){
-        double x;
-        x = Math.random();
-        coordenada_x =(int) Math.floor((anchoPantalla-290)*x);
-        //coordenada_x = 50;
-        coordenada_y = 0;
-    }
-
 
     public void ActualizarCoordenadas(){
         coordenada_x+= velocidad*direccion_x;
         coordenada_y+= velocidad*direccion_y;
     }
 
-    //Metodo necesita el primer argumento
-    public void Dibujar(Canvas c, Paint p){
-        c.drawBitmap(Juego.getRectangulo(),coordenada_x,coordenada_y,p);
-    }
+    //Determina la posicion x en la que aparece
+    public abstract void CalcularCoordenadas();
 
+    //Metodo necesita el primer argumento
+    public abstract void Dibujar(Canvas c, Paint p);
+
+    //Getters & Setters
     public int getCoordenada_x() {
         return coordenada_x;
     }

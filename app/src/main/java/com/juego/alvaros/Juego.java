@@ -24,14 +24,13 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
     private BucleJuego bucle;
     private static final String TAG = Juego.class.getSimpleName();
-    private Paint myPaint;
 
     //Bloques
     private static Bitmap rectangulo, cuadrado, hexagono;
     //numero enemigos por minuto
     private int rectangulo_minuto =50;
     //frames que restan hasta generar nuevo enemigo
-    private int frames_new_rectangulo = 0;
+    private int frames_new_bloque = 0;
     //lista de enemigos
     private ArrayList<Rectangulo> listaBloques = new ArrayList<>();
 
@@ -71,11 +70,11 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
      * nuevos estados y dejando listo el sistema para un repintado.
      */
     public void actualizar(){
-        if(frames_new_rectangulo==0){
-            crearRectangulo();
-            frames_new_rectangulo = BucleJuego.getFPS()*60/rectangulo_minuto;
+        if(frames_new_bloque ==0){
+            crearBloque();
+            frames_new_bloque = BucleJuego.getFPS()*60/rectangulo_minuto;
         }
-        frames_new_rectangulo--;
+        frames_new_bloque--;
 
         for(Rectangulo r : listaBloques){
             r.ActualizarCoordenadas();
@@ -88,7 +87,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     public void renderizar(Canvas canvas){
         if(canvas!=null){
             //canvas.drawColor(255255000);
-            myPaint = new Paint();
+            Paint myPaint = new Paint();
             //myPaint.setStyle(Paint.Style.STROKE);
             for(Rectangulo r : listaBloques){
                 r.Dibujar(canvas, myPaint);
@@ -98,10 +97,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     //No lo implementa el libro pero Android Studio te obliga
     @Override
-    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
-    }
-
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) { }
 
     /**
      *
@@ -124,16 +120,13 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void cargaRectangulos(){
-        frames_new_rectangulo = BucleJuego.getFPS() *60/rectangulo_minuto;
-        rectangulo = BitmapFactory.decodeResource(
-                getResources(), R.drawable.rectangulo);
-        cuadrado = BitmapFactory.decodeResource(
-                getResources(), R.drawable.cuadrado);
-        hexagono = BitmapFactory.decodeResource(
-                getResources(), R.drawable.hexagono);
+        frames_new_bloque = BucleJuego.getFPS() *60/rectangulo_minuto;
+        rectangulo = BitmapFactory.decodeResource(getResources(), R.drawable.rectangulo);
+        cuadrado = BitmapFactory.decodeResource(getResources(), R.drawable.cuadrado);
+        hexagono = BitmapFactory.decodeResource(getResources(), R.drawable.hexagono);
     }
 
-    public void crearRectangulo(){
+    public void crearBloque(){
         //probabilidad de rectangulo 80% y cuadrado 20%
         double numero = Math.random();
 

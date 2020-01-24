@@ -1,8 +1,8 @@
 package com.juego.alvaros.bloques;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-
 import com.juego.alvaros.Juego;
 
 public class Hexagono extends Rectangulo {
@@ -19,6 +19,7 @@ public class Hexagono extends Rectangulo {
         c.drawBitmap(Juego.getHexagono(),coordenada_x,coordenada_y,p);
     }
 
+    @Override
     public void ActualizarCoordenadas(){
         super.ActualizarCoordenadas();
         if (coordenada_y <=0 ||coordenada_y >= altoPantalla -30){
@@ -26,8 +27,8 @@ public class Hexagono extends Rectangulo {
         }
     }
 
+    @Override
     public void CalcularCoordenadas(){
-        super.ActualizarCoordenadas();
         double y;
         y = Math.random();
         if(y>=0.5){ //sale por la izquierda

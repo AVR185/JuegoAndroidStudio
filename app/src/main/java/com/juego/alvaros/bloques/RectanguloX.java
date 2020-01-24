@@ -1,5 +1,7 @@
 package com.juego.alvaros.bloques;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import com.juego.alvaros.Juego;
 
 /**Rectangulo que aparece en la parte superior de la pantalla en uan posicion aleatora en x
@@ -13,6 +15,21 @@ public class RectanguloX extends Rectangulo {
         this.setDireccion_x((Math.random()>=0.5)? 1:-1);
     }
 
+    @Override
+    public void Dibujar(Canvas c, Paint p){
+        c.drawBitmap(Juego.getRectangulo(),coordenada_x,coordenada_y,p);
+    }
+
+    //Determina la posicion x en la que aparece
+    @Override
+    public void CalcularCoordenadas(){
+        double x;
+        x = Math.random();
+        coordenada_x =(int) Math.floor((anchoPantalla-290)*x);
+        coordenada_y = 0;
+    }
+
+    @Override
     public void ActualizarCoordenadas(){
         super.ActualizarCoordenadas();
         if (coordenada_x <=0 ||coordenada_x >= anchoPantalla -280){
