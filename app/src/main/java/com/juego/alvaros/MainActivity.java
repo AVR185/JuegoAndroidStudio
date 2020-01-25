@@ -69,22 +69,23 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void inicioJuego(View view) {
-        setContentView(new Juego(this));
+        setContentView(R.layout.juego_layout);
     }
 
-/*
     @Override
     protected void onStart() {
         super.onStart();
         mDrawable.start();
+        introMusica();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         mDrawable.stop();
+        mPlayer.stop();
     }
-*/
+
     //================= OCULTAMOS LA UI =================
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

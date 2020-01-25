@@ -7,6 +7,7 @@ import com.juego.alvaros.Juego;
 
 public class Hexagono extends Rectangulo {
 
+
     public Hexagono(Juego j) {
         super(j);
         this.setVelocidad(20);
@@ -22,8 +23,8 @@ public class Hexagono extends Rectangulo {
     @Override
     public void ActualizarCoordenadas(){
         super.ActualizarCoordenadas();
-        if (coordenada_y <=0 ||coordenada_y >= altoPantalla -30){
-            direccion_y =-direccion_y;
+        if (coordenada_y <=0 || coordenada_y >= altoPantalla -30){
+            direccion_y = -direccion_y;
         }
     }
 

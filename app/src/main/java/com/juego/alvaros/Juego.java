@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
@@ -35,8 +37,15 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     private ArrayList<Rectangulo> listaBloques = new ArrayList<>();
 
     //Constructor de la clase
-    public Juego(Context context) {
-        super(context);
+    public Juego(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        //Hacemos el fondo transparente para que se vea el fondo animado
+        SurfaceView surfaceView = findViewById(R.id.idGameView);
+        surfaceView.setZOrderOnTop(true);    // necessary
+        SurfaceHolder sfhTrackHolder = surfaceView.getHolder();
+        sfhTrackHolder.setFormat(PixelFormat.TRANSPARENT);
+
         holder = getHolder();
         holder.addCallback(this);
         cargaRectangulos();
@@ -76,8 +85,15 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         }
         frames_new_bloque--;
 
-        for(Rectangulo r : listaBloques){
-            r.ActualizarCoordenadas();
+        for(int i = 0;i<listaBloques.size(); i++){
+            listaBloques.get(i).ActualizarCoordenadas();
+            //Si se sale de las coordenadas de la pantalla lo eliminamos de la lista
+            if(listaBloques.get(i).coordenada_x<-10 || listaBloques.get(i).coordenada_y<-20 ||
+                    listaBloques.get(i).coordenada_x>listaBloques.get(i).anchoPantalla ||
+                    listaBloques.get(i).coordenada_y>(listaBloques.get(i).altoPantalla+50)){
+                listaBloques.remove(i);
+                i--;
+            }
         }
     }
 

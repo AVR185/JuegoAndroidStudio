@@ -33,7 +33,7 @@ public class RectanguloX extends Rectangulo {
     public void ActualizarCoordenadas(){
         super.ActualizarCoordenadas();
         if (coordenada_x <=0 ||coordenada_x >= anchoPantalla -280){
-            direccion_x =-direccion_x;
+            direccion_x = -direccion_x;
         }
     }
 }
