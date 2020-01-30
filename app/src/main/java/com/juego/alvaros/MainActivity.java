@@ -63,15 +63,6 @@ public class MainActivity extends AppCompatActivity {
         introMusica();
     }
 
-    //============ Eventos =============
-    /**
-     * Metodo para iniciar una nueva partida
-     * @param view
-     */
-    public void inicioJuego(View view) {
-        setContentView(R.layout.juego_layout);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -84,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         mDrawable.stop();
         mPlayer.stop();
+    }
+
+    //============ Eventos =============
+    /**
+     * Metodo para iniciar una nueva partida
+     * @param view
+     */
+    public void inicioJuego(View view) {
+        setContentView(R.layout.juego_layout);
     }
 
     //================= OCULTAMOS LA UI =================

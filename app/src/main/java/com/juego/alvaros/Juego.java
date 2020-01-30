@@ -4,18 +4,21 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
-
 import com.juego.alvaros.bloques.Hexagono;
 import com.juego.alvaros.bloques.Rectangulo;
 import com.juego.alvaros.bloques.Cuadrado;
 import com.juego.alvaros.bloques.RectanguloX;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
@@ -27,14 +30,21 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     private BucleJuego bucle;
     private static final String TAG = Juego.class.getSimpleName();
 
-    //Bloques
+    //=============== Bloques =================
     private static Bitmap rectangulo, cuadrado, hexagono;
     //numero enemigos por minuto
-    private int rectangulo_minuto =50;
+    private int bloquesMinuto =50;
     //frames que restan hasta generar nuevo enemigo
     private int frames_new_bloque = 0;
     //lista de enemigos
     private ArrayList<Rectangulo> listaBloques = new ArrayList<>();
+
+    //============== Dificultad ===============
+    private int puntos = 0;
+    private static int nivel = 1;
+    private final int PUNTOS_CAMBIOS_NIVEL = 1000;
+    TimerTask temporizador;
+    Timer timer;
 
     //Constructor de la clase
     public Juego(Context context, AttributeSet attrs) {
@@ -49,6 +59,16 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         holder = getHolder();
         holder.addCallback(this);
         cargaRectangulos();
+
+        //Cada 10 segundos sumamos 20 puntos a la puntuacion
+        timer = new Timer();
+        temporizador = new TimerTask() {
+            @Override
+            public void run() {
+                puntos += 50;
+            }
+        };
+        timer.scheduleAtFixedRate(temporizador, 0, 1000);
     }
 
     //Metodos que hay que implementar de la interfaz
@@ -81,19 +101,25 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     public void actualizar(){
         if(frames_new_bloque ==0){
             crearBloque();
-            frames_new_bloque = BucleJuego.getFPS()*60/rectangulo_minuto;
+            frames_new_bloque = BucleJuego.getFPS()*60/ bloquesMinuto;
         }
         frames_new_bloque--;
 
         for(int i = 0;i<listaBloques.size(); i++){
             listaBloques.get(i).ActualizarCoordenadas();
             //Si se sale de las coordenadas de la pantalla lo eliminamos de la lista
-            if(listaBloques.get(i).coordenada_x<-10 || listaBloques.get(i).coordenada_y<-20 ||
+            if(listaBloques.get(i).coordenada_x<-20 || listaBloques.get(i).coordenada_y<-20 ||
                     listaBloques.get(i).coordenada_x>listaBloques.get(i).anchoPantalla ||
-                    listaBloques.get(i).coordenada_y>(listaBloques.get(i).altoPantalla+50)){
+                    listaBloques.get(i).coordenada_y>(listaBloques.get(i).altoPantalla+10)){
                 listaBloques.remove(i);
                 i--;
             }
+        }
+
+        //Cada PUNTOS_CAMBIO_NIVEL se incremeneta la dificultad
+        if(nivel != puntos/PUNTOS_CAMBIOS_NIVEL && puntos/PUNTOS_CAMBIOS_NIVEL != 0){
+            nivel = puntos/PUNTOS_CAMBIOS_NIVEL;
+            bloquesMinuto += 10;
         }
     }
 
@@ -102,11 +128,17 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
      */
     public void renderizar(Canvas canvas){
         if(canvas!=null){
-            //canvas.drawColor(255255000);
+            //Borrar canvas antes de dibujar
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+
+            //Dibujamos la puntuación y el nivel por pantalla
             Paint myPaint = new Paint();
-            //myPaint.setStyle(Paint.Style.STROKE);
+            myPaint.setTextSize(50);
+            myPaint.setColor(Color.GREEN);
+            canvas.drawText("Puntos: " + puntos + " - Nivel: " + nivel, 50, 50, myPaint);
+
             for(Rectangulo r : listaBloques){
-                r.Dibujar(canvas, myPaint);
+                r.Dibujar(canvas);
             }
         }
     }
@@ -136,7 +168,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void cargaRectangulos(){
-        frames_new_bloque = BucleJuego.getFPS() *60/rectangulo_minuto;
+        frames_new_bloque = BucleJuego.getFPS() *60/ bloquesMinuto;
         rectangulo = BitmapFactory.decodeResource(getResources(), R.drawable.rectangulo);
         cuadrado = BitmapFactory.decodeResource(getResources(), R.drawable.cuadrado);
         hexagono = BitmapFactory.decodeResource(getResources(), R.drawable.hexagono);
@@ -166,4 +198,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     public static Bitmap getHexagono(){
         return hexagono;
     }
+
+
+    public static int getNivel(){ return nivel; }
 }

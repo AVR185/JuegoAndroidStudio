@@ -30,6 +30,7 @@ public abstract class Rectangulo {
     public Rectangulo(Juego j){
         juego = j;
         CalcularCoordenadas();
+        this.setVelocidad(velocidad + (Juego.getNivel()*2));
     }
 
     public void ActualizarCoordenadas(){
@@ -41,7 +42,7 @@ public abstract class Rectangulo {
     public abstract void CalcularCoordenadas();
 
     //Metodo necesita el primer argumento
-    public abstract void Dibujar(Canvas c, Paint p);
+    public abstract void Dibujar(Canvas c);
 
     //Getters & Setters
     public int getCoordenada_x() {
