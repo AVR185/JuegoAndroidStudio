@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.widget.ImageView;
+
 import com.juego.alvaros.bloques.Hexagono;
 import com.juego.alvaros.bloques.Rectangulo;
 import com.juego.alvaros.bloques.Cuadrado;
@@ -107,6 +109,18 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
         for(int i = 0;i<listaBloques.size(); i++){
             listaBloques.get(i).ActualizarCoordenadas();
+
+            listaBloques.get(i).ActualizarCoordenadas();
+            /*if(colisiones(listaBloques.get(i),MainActivity.getBlue_Ball())){
+                Log.i("COL","Impacto de bola Azul");
+            }
+            if(colisiones(listaBloques.get(i),MainActivity.getRed_Ball())){
+                Log.i("COL","Impacto de bola Roja");
+            }*/
+            if(colisiones(listaBloques.get(i), MainActivity.getRed_Ball()) || colisiones(listaBloques.get(i),MainActivity.getBlue_Ball())){
+                finalizarJuego();
+            }
+
             //Si se sale de las coordenadas de la pantalla lo eliminamos de la lista
             if(listaBloques.get(i).coordenada_x<-20 || listaBloques.get(i).coordenada_y<-20 ||
                     listaBloques.get(i).coordenada_x>listaBloques.get(i).anchoPantalla ||
@@ -141,6 +155,18 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
                 r.Dibujar(canvas);
             }
         }
+    }
+
+    public boolean colisiones (Rectangulo rect, ImageView bola){
+        int alto_mayor = (bola.getHeight()>=rect.getFigura().getHeight())? bola.getHeight():rect.getFigura().getHeight();
+        int ancho_mayor= (bola.getWidth()>=rect.getFigura().getWidth())? bola.getWidth():rect.getFigura().getWidth();
+        int diferenciaX= Math.abs(rect.getCoordenada_x()- (int)bola.getX());
+        int diferenciaY= Math.abs(rect.getCoordenada_y()- (int)bola.getY());
+        return (diferenciaX<ancho_mayor&&diferenciaY<alto_mayor);
+    }
+
+    public void finalizarJuego(){
+        bucle.fin();
     }
 
     //No lo implementa el libro pero Android Studio te obliga

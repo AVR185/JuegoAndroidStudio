@@ -18,7 +18,7 @@ public class RectanguloX extends Rectangulo {
 
     @Override
     public void Dibujar(Canvas c){
-        c.drawBitmap(Juego.getRectangulo(), this.coordenada_x, this.coordenada_y, null);
+        c.drawBitmap(this.figura, this.coordenada_x, this.coordenada_y, null);
     }
 
     //Determina la posicion x en la que aparece

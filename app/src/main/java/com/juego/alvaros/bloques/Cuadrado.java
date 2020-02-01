@@ -13,6 +13,7 @@ public class Cuadrado extends Rectangulo {
 
     public Cuadrado(Juego juego){
         super(juego);
+        this.figura = Juego.getCuadrado();
         this.setDireccion_x(0);
         this.setVelocidad(velocidad + (Juego.getNivel()*2));
     }
@@ -20,7 +21,7 @@ public class Cuadrado extends Rectangulo {
     //Metodo necesita el primer argumento
     @Override
     public void Dibujar(Canvas c){
-        c.drawBitmap(Juego.getCuadrado(), this.coordenada_x, this.coordenada_y, null);
+        c.drawBitmap(this.figura, this.coordenada_x, this.coordenada_y, null);
     }
 
     @Override

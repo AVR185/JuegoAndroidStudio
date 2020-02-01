@@ -9,6 +9,7 @@ public class Hexagono extends Rectangulo {
 
     public Hexagono(Juego j) {
         super(j);
+        this.figura = Juego.getHexagono();
         this.setVelocidad(velocidad + (Juego.getNivel()*2));
         this.setDireccion_y((Math.random()>=0.5)? 1:-1);
     }
@@ -16,7 +17,7 @@ public class Hexagono extends Rectangulo {
     //Metodo necesita el primer argumento
     @Override
     public void Dibujar(Canvas c){
-        c.drawBitmap(Juego.getHexagono(),this.coordenada_x, this.coordenada_y, null);
+        c.drawBitmap(this.figura,this.coordenada_x, this.coordenada_y, null);
     }
 
     @Override

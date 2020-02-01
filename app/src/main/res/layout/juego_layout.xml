@@ -25,4 +25,44 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
+    <ImageView
+        android:id="@+id/Blue_Control"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="80dp"
+        app:srcCompat="@drawable/controller" />
+
+    <ImageView
+        android:id="@+id/Blue_Ball"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="150dp"
+        app:srcCompat="@drawable/circulo_azul" />
+
+    <ImageView
+        android:id="@+id/Red_Ball"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="150dp"
+        app:srcCompat="@drawable/circulo_rojo" />
+
+    <ImageView
+        android:id="@+id/Red_Control"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="80dp"
+        app:srcCompat="@drawable/controller" />
+
 </RelativeLayout>

@@ -7,10 +7,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ObjectAnimator;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private static TabLayout tabLayout;
     //MusicaIntro
     private static MediaPlayer mPlayer;
+    //Bolas del juego
+    private static ImageView Blue_Ball  ;
+    private static ImageView Red_Ball ;
 
     //Medidas de la pantalla
     private static int ancho;
@@ -84,6 +89,79 @@ public class MainActivity extends AppCompatActivity {
      */
     public void inicioJuego(View view) {
         setContentView(R.layout.juego_layout);
+
+        final ImageView Controller_Blue = findViewById(R.id.Blue_Control);
+        final ImageView Controller_Red = findViewById(R.id.Red_Control);
+        Blue_Ball = findViewById(R.id.Blue_Ball);
+        Red_Ball = findViewById(R.id.Red_Ball);
+
+        Controller_Blue.setOnTouchListener(new View.OnTouchListener()
+        {
+            PointF DownPT = new PointF(); // Record Mouse Position When Pressed Down
+            PointF StartPT = new PointF(); // Record Start Position of 'img'
+            PointF StartPT_Ball = new PointF(); // Record Start Position of 'img'
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_MOVE :
+                        Controller_Blue.setX((int)(StartPT.x + event.getX() - DownPT.x));
+                        Controller_Blue.setY((int)(StartPT.y + event.getY() - DownPT.y));
+                        Blue_Ball.setX((int)(StartPT_Ball.x + event.getX() - DownPT.x));
+                        Blue_Ball.setY((int)(StartPT_Ball.y + event.getY() - DownPT.y));
+                        StartPT.set(Controller_Blue.getX(), Controller_Blue.getY());
+                        StartPT_Ball.set(Blue_Ball.getX(), Blue_Ball.getY());
+                        break;
+                    case MotionEvent.ACTION_DOWN :
+                        DownPT.set( event.getX(), event.getY());
+                        StartPT.set( Controller_Blue.getX(), Controller_Blue.getY());
+                        StartPT_Ball.set(Blue_Ball.getX(), Blue_Ball.getY());
+                        break;
+                    case MotionEvent.ACTION_UP :
+                        // Nothing have to do
+                        break;
+                    default :
+                        break;
+                }
+                return true;
+            }
+        });
+
+        Controller_Red.setOnTouchListener(new View.OnTouchListener()
+        {
+            PointF DownPT = new PointF(); // Record Mouse Position When Pressed Down
+            PointF StartPT = new PointF(); // Record Start Position of 'img'
+            PointF StartPT_Ball = new PointF(); // Record Start Position of 'img'
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_MOVE :
+                        Controller_Red.setX((int)(StartPT.x + event.getX() - DownPT.x));
+                        Controller_Red.setY((int)(StartPT.y + event.getY() - DownPT.y));
+                        Red_Ball.setX((int)(StartPT_Ball.x + event.getX() - DownPT.x));
+                        Red_Ball.setY((int)(StartPT_Ball.y + event.getY() - DownPT.y));
+                        StartPT.set(Controller_Red.getX(), Controller_Red.getY());
+                        StartPT_Ball.set(Red_Ball.getX(), Red_Ball.getY());
+                        break;
+                    case MotionEvent.ACTION_DOWN :
+                        DownPT.set( event.getX(), event.getY() );
+                        StartPT.set( Controller_Red.getX(), Controller_Red.getY() );
+                        StartPT_Ball.set(Red_Ball.getX(), Red_Ball.getY());
+                        break;
+                    case MotionEvent.ACTION_UP :
+                        // Nothing have to do
+                        break;
+                    default :
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     //================= OCULTAMOS LA UI =================
@@ -269,5 +347,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static int getAncho(){
         return ancho;
+    }
+
+    public static ImageView getBlue_Ball() {
+        return Blue_Ball;
+    }
+
+    public static ImageView getRed_Ball() {
+        return Red_Ball;
     }
 }
