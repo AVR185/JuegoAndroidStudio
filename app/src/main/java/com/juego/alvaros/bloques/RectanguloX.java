@@ -1,9 +1,8 @@
 package com.juego.alvaros.bloques;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
-import com.juego.alvaros.Juego;
+import com.juego.alvaros.Juego.Juego;
 
 /**Rectangulo que aparece en la parte superior de la pantalla en uan posicion aleatora en x
  * y se mueve hacia la parte inferior de la pantalla a velocidad constante

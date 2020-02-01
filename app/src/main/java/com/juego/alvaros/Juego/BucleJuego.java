@@ -1,4 +1,4 @@
-package com.juego.alvaros;
+package com.juego.alvaros.Juego;
 
 import android.graphics.Canvas;
 import android.util.Log;
@@ -21,7 +21,7 @@ public class BucleJuego extends Thread {
     private Juego juego;
     private boolean juegoEnEjecucion = true;
     private static final String TAG = Juego.class.getSimpleName();
-    private SurfaceHolder surfaceHolder;
+    private final SurfaceHolder surfaceHolder;
 
     //Constructor de la clase
     BucleJuego(SurfaceHolder surfaceHolder, Juego juego){
@@ -96,11 +96,11 @@ public class BucleJuego extends Thread {
     /**
      * Método que finaliza el bucle del juego
      */
-    public void fin(){
+    void fin(){
         juegoEnEjecucion = false;
     }
 
-    public static int getFPS(){
+    static int getFPS(){
         return MAX_FPS;
     }
 }

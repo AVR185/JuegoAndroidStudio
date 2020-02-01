@@ -2,8 +2,8 @@ package com.juego.alvaros.bloques;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import com.juego.alvaros.Juego;
+
+import com.juego.alvaros.Juego.Juego;
 import com.juego.alvaros.MainActivity;
 
 /**
@@ -13,12 +13,13 @@ public abstract class Rectangulo {
     public int coordenada_x,coordenada_y;
     public Juego juego;
     Bitmap figura;
+    int alto, ancho;
 
     /*Convencion de la direccion
-            Eje x Derecha   1 Izquerda  1
-            Eje y Abajo     1 Arriba    1
-            En ambos ejes 0 indica estatico
-         */
+                Eje x Derecha   1 Izquerda  1
+                Eje y Abajo     1 Arriba    1
+                En ambos ejes 0 indica estatico
+             */
     public int direccion_x = 1;
     public int direccion_y = 1;
 
@@ -32,6 +33,8 @@ public abstract class Rectangulo {
     public Rectangulo(Juego j){
         juego = j;
         figura = Juego.getRectangulo();
+        alto = figura.getHeight();
+        ancho = figura.getWidth();
         CalcularCoordenadas();
         this.setVelocidad(velocidad + (Juego.getNivel()*2));
     }
@@ -88,7 +91,11 @@ public abstract class Rectangulo {
         this.velocidad = velocidad;
     }
 
-    public Bitmap getFigura() {
-        return figura;
+    public int getAlto() {
+        return alto;
+    }
+
+    public int getAncho() {
+        return ancho;
     }
 }

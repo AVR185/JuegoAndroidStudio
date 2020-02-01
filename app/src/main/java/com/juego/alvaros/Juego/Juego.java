@@ -1,4 +1,4 @@
-package com.juego.alvaros;
+package com.juego.alvaros.Juego;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +14,8 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.widget.ImageView;
 
+import com.juego.alvaros.MainActivity;
+import com.juego.alvaros.R;
 import com.juego.alvaros.bloques.Hexagono;
 import com.juego.alvaros.bloques.Rectangulo;
 import com.juego.alvaros.bloques.Cuadrado;
@@ -158,8 +160,8 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean colisiones (Rectangulo rect, ImageView bola){
-        int alto_mayor = (bola.getHeight()>=rect.getFigura().getHeight())? bola.getHeight():rect.getFigura().getHeight();
-        int ancho_mayor= (bola.getWidth()>=rect.getFigura().getWidth())? bola.getWidth():rect.getFigura().getWidth();
+        int alto_mayor = (bola.getHeight()>=rect.getAlto())? bola.getHeight():rect.getAlto();
+        int ancho_mayor= (bola.getWidth()>=rect.getAncho())? bola.getWidth():rect.getAncho();
         int diferenciaX= Math.abs(rect.getCoordenada_x()- (int)bola.getX());
         int diferenciaY= Math.abs(rect.getCoordenada_y()- (int)bola.getY());
         return (diferenciaX<ancho_mayor&&diferenciaY<alto_mayor);
@@ -224,7 +226,6 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     public static Bitmap getHexagono(){
         return hexagono;
     }
-
 
     public static int getNivel(){ return nivel; }
 }

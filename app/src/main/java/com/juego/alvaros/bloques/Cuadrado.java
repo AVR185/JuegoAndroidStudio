@@ -1,7 +1,7 @@
 package com.juego.alvaros.bloques;
 
 import android.graphics.Canvas;
-import com.juego.alvaros.Juego;
+import com.juego.alvaros.Juego.Juego;
 
 /**Rectangulo que aparece en la parte superior de la pantalla en uan posicion aleatora en x
  *  y se mueve hacia la parte inferior de la pantalla
@@ -14,6 +14,8 @@ public class Cuadrado extends Rectangulo {
     public Cuadrado(Juego juego){
         super(juego);
         this.figura = Juego.getCuadrado();
+        this.alto = this.figura.getHeight();
+        this.ancho = this.figura.getWidth();
         this.setDireccion_x(0);
         this.setVelocidad(velocidad + (Juego.getNivel()*2));
     }

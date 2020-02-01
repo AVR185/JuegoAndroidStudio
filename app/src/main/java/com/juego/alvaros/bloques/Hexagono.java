@@ -1,7 +1,7 @@
 package com.juego.alvaros.bloques;
 
 import android.graphics.Canvas;
-import com.juego.alvaros.Juego;
+import com.juego.alvaros.Juego.Juego;
 
 public class Hexagono extends Rectangulo {
     //Atributos
@@ -10,6 +10,8 @@ public class Hexagono extends Rectangulo {
     public Hexagono(Juego j) {
         super(j);
         this.figura = Juego.getHexagono();
+        this.alto = this.figura.getHeight();
+        this.ancho = this.figura.getWidth();
         this.setVelocidad(velocidad + (Juego.getNivel()*2));
         this.setDireccion_y((Math.random()>=0.5)? 1:-1);
     }

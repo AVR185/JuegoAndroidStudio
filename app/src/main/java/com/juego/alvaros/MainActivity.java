@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.media.MediaPlayer;
@@ -23,19 +24,18 @@ import com.juego.alvaros.vistas.FragmentCreditos;
 import com.juego.alvaros.vistas.FragmentMenuPrincipal;
 import com.juego.alvaros.vistas.FragmentRanking;
 import com.juego.alvaros.vistas.FragmentSeleccionNivel;
+
+import java.util.Objects;
+
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
  * @version 1.0 18/12/2019
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     //Atributos
     private final ParticlesDrawable mDrawable = new ParticlesDrawable(); //objeto del tipo ParticleDrawable para el fondo
-    // para gestionar cada uno de los fragmentos
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    // Para alojar el contenido de cada fragment
-    private ViewPager mViewPager;
     private static TabLayout tabLayout;
     //MusicaIntro
     private static MediaPlayer mPlayer;
@@ -85,8 +85,9 @@ public class MainActivity extends AppCompatActivity {
     //============ Eventos =============
     /**
      * Metodo para iniciar una nueva partida
-     * @param view
+     * @param view view que llama a dicha acción
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void inicioJuego(View view) {
         setContentView(R.layout.juego_layout);
 
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         StartPT_Ball.set(Blue_Ball.getX(), Blue_Ball.getY());
                         break;
                     case MotionEvent.ACTION_UP :
-                        // Nothing have to do
+                        v.performClick();
                         break;
                     default :
                         break;
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         StartPT_Ball.set(Red_Ball.getX(), Red_Ball.getY());
                         break;
                     case MotionEvent.ACTION_UP :
-                        // Nothing have to do
+                        v.performClick();
                         break;
                     default :
                         break;
@@ -240,13 +241,15 @@ public class MainActivity extends AppCompatActivity {
 
     //================== Tab Layout ======================
     private void inicializarTab() {
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        // para gestionar cada uno de los fragmentos
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        // Para alojar el contenido de cada fragment
+        ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.getTabAt(2).select();
+        Objects.requireNonNull(tabLayout.getTabAt(2)).select();
     }
 
     /**
@@ -261,15 +264,15 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Método que responde al evento de hacer click en las ImageButton del menu principal
-     * @param view
+     * @param view view que llama al evento
      */
     public void seleccionarMenu(View view) {
         switch (view.getId()){
             case R.id.idBotonAjustes:
-                tabLayout.getTabAt(4).select();
+                Objects.requireNonNull(tabLayout.getTabAt(4)).select();
                 break;
             case R.id.idBotonCreditos:
-                tabLayout.getTabAt(0).select();
+                Objects.requireNonNull(tabLayout.getTabAt(0)).select();
                 break;
             default:
                 Toast.makeText(getApplicationContext(), "Vuelva a intentarlo", Toast.LENGTH_LONG).show();
@@ -290,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
      * Clase que devolvera un fragment segun la seccion donde se encuentre
      * */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -324,8 +327,8 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * Método para poner el titulo de cada TabLayout
-         * @param position
-         * @return
+         * @param position posición de cada página
+         * @return CharSequence con el titulo de cada páguina
          */
         @Override
         public CharSequence getPageTitle(int position) {

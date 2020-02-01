@@ -18,7 +18,7 @@
         app:lineDistance="86dp"
         app:lineThickness="1dp" />
 
-    <com.juego.alvaros.Juego
+    <com.juego.alvaros.Juego.Juego
         android:id="@+id/idGameView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +33,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="80dp"
         android:layout_marginBottom="80dp"
-        app:srcCompat="@drawable/controller" />
+        app:srcCompat="@drawable/ic_joystick"
+        android:contentDescription="@string/controlador_azul"/>
 
     <ImageView
         android:id="@+id/Blue_Ball"
@@ -43,7 +44,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="150dp"
-        app:srcCompat="@drawable/circulo_azul" />
+        app:srcCompat="@drawable/circulo_azul"
+        android:contentDescription="@string/descripcion2"/>
 
     <ImageView
         android:id="@+id/Red_Ball"
@@ -53,7 +55,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="150dp"
-        app:srcCompat="@drawable/circulo_rojo" />
+        app:srcCompat="@drawable/circulo_rojo"
+        android:contentDescription="@string/descripcion1"/>
 
     <ImageView
         android:id="@+id/Red_Control"
@@ -63,6 +66,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="80dp"
-        app:srcCompat="@drawable/controller" />
+        app:srcCompat="@drawable/ic_joystick"
+        android:contentDescription="@string/controlador_rojo" />
 
 </RelativeLayout>

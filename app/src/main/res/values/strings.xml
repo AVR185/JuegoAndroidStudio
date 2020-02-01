@@ -48,4 +48,7 @@
     <string name="icono_github">Icono GitHub</string>
     <string name="icono_linkedin">Icono LikedIn</string>
 
+    <!-- Descripción controladores -->
+    <string name="controlador_azul">Joystick bola azul</string>
+    <string name="controlador_rojo">Joystick bola roja</string>
 </resources>
