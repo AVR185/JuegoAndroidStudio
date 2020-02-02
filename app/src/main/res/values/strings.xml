@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TITULO JUEGO</string>
+    <string name="app_name">BLOCKS</string>
     <string name="nueva_partida">NUEVA PARTIDA</string>
     <string name="seleccion_nivel">SELECCIÓN DE NIVEL</string>
     <string name="top">TOP 10</string>
@@ -41,12 +41,23 @@
     <string name="valor_musica">100%</string>
     <string name="valor_fx">100%</string>
 
-    <!-- Texto Dialog Fragment -->
+    <!-- Texto Dialog Fragment Autores -->
     <string name="linkedin">Linkedin:</string>
     <string name="github">GitHub:</string>
     <string name="aceptar">Aceptar</string>
     <string name="icono_github">Icono GitHub</string>
     <string name="icono_linkedin">Icono LikedIn</string>
+
+    <!-- Texto Dialog Fragment Registrar Nombre -->
+    <string name="titulo">¡Felicidades estás en el TOP 10!</string>
+    <string name="introducir">Introduce un nombre</string>
+    <string name="requisito">Con este nombre aparecerás en el Ranking</string>
+
+    <!-- Texto Dialog Fragment Reiniciar -->
+    <string name="titulo2">Fin de la partida</string>
+    <string name="mensaje">¿Quieres reiniciar la partida o volver al menú?</string>
+    <string name="jugar">Jugar</string>
+    <string name="volver_menu">Menú</string>
 
     <!-- Descripción controladores -->
     <string name="controlador_azul">Joystick bola azul</string>

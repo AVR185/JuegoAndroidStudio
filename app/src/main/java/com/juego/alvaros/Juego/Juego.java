@@ -13,18 +13,20 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.widget.ImageView;
-
-import com.juego.alvaros.BaseDatos.BDRanking;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import com.juego.alvaros.MainActivity;
 import com.juego.alvaros.R;
 import com.juego.alvaros.bloques.Hexagono;
 import com.juego.alvaros.bloques.Rectangulo;
 import com.juego.alvaros.bloques.Cuadrado;
 import com.juego.alvaros.bloques.RectanguloX;
+import com.juego.alvaros.vistas.dialogos.DialogRegistroNombre;
+import com.juego.alvaros.vistas.dialogos.DialogoReinicio;
 import com.juego.alvaros.vistas.FragmentRanking;
 import com.juego.alvaros.vistas.FragmentSeleccionNivel;
-
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,8 +42,6 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     //=============== Bloques =================
     private static Bitmap rectangulo, cuadrado, hexagono;
-    //numero enemigos por minuto
-    private int bloquesMinuto =50;
     //frames que restan hasta generar nuevo enemigo
     private int frames_new_bloque = 0;
     //lista de enemigos
@@ -51,12 +51,19 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     private final int PUNTOS_CAMBIOS_NIVEL = 1000;
     private static int nivel = FragmentSeleccionNivel.getNivel()==0?1:FragmentSeleccionNivel.getNivel();
     private int puntos = nivel==1?0:nivel*PUNTOS_CAMBIOS_NIVEL;
+    //numero enemigos por minuto
+    private int bloquesMinuto = 50 + 10*nivel;
     TimerTask temporizador;
     Timer timer;
+
+    private static String nick;
+    private FragmentManager fragmentManager;
 
     //Constructor de la clase
     public Juego(Context context, AttributeSet attrs) {
         super(context, attrs);
+        //Activity activity = (Activity) context;
+        fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
         //Hacemos el fondo transparente para que se vea el fondo animado
         SurfaceView surfaceView = findViewById(R.id.idGameView);
@@ -178,8 +185,16 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     public void finalizarJuego(){
         bucle.fin();
-        if(FragmentRanking.mejorPuntuacion(puntos))
-            FragmentRanking.addRegistro("nombre", puntos, nivel);
+        //Mostramos el dialogo de fin de juego
+        DialogoReinicio reinicio = new DialogoReinicio();
+        reinicio.show(Objects.requireNonNull(fragmentManager),"Reinicio");
+
+        //Mostramos o no el dialogo para guardar el nick
+        DialogRegistroNombre dialogo = new DialogRegistroNombre();;
+        if(FragmentRanking.mejorPuntuacion(puntos)){
+            dialogo.show(Objects.requireNonNull(fragmentManager),"Registro nombre");
+            FragmentRanking.addRegistro(nick, puntos, nivel);
+        }
     }
 
     //No lo implementa el libro pero Android Studio te obliga
@@ -242,5 +257,9 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     public static void setNivel(int nivel) {
         Juego.nivel = nivel;
+    }
+
+    public static void setNick(String nick) {
+        Juego.nick = nick;
     }
 }

@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#1F1F1F</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FFFFFF</color>
-    <color name="colorEtiqueta1">#FF80AB</color>
+    <color name="colorAccent">#FF80AB</color>
+    <color name="colorBlanco">#FFFFFF</color>
     <color name="colorEtiqueta2">#84FFFF</color>
     <color name="colorContraste">#FFFF8D</color>
 </resources>

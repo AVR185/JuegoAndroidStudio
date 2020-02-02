@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.google.android.material.tabs.TabLayout;
 import com.juego.alvaros.MainActivity;
 import com.juego.alvaros.R;
+import com.juego.alvaros.vistas.dialogos.DialogInfoAutor;
 
 import java.util.Objects;
 
@@ -60,7 +61,7 @@ public class FragmentCreditos extends Fragment implements ListView.OnItemClickLi
 
 
     //Getter para conocer la opcion de la lista pulsada
-    static int getPosicion() {
+    public static int getPosicion() {
         return posicion;
     }
 }

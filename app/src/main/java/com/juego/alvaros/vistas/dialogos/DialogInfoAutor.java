@@ -1,4 +1,4 @@
-package com.juego.alvaros.vistas;
+package com.juego.alvaros.vistas.dialogos;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.juego.alvaros.R;
+import com.juego.alvaros.vistas.FragmentCreditos;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
@@ -24,7 +24,7 @@ public class DialogInfoAutor extends DialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();

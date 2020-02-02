@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.juego.alvaros.BaseDatos.BDRanking;
 import com.juego.alvaros.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +59,13 @@ public class FragmentRanking extends Fragment {
 
     public static boolean mejorPuntuacion(int puntos){
         Cursor c=db.rawQuery("SELECT * FROM Ranking WHERE puntuacion > ?", new String[]{String.valueOf(puntos)});
-        if (c.getCount() < 10){
+        //c.moveToFirst();
+        if (c.getCount() < 10 && c.getCount()!=-1){
             c.close();
             return true;
         } else {
             c.close();
-            return true;
+            return false;
         }
     }
 

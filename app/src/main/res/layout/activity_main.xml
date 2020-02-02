@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        app:dotColor="@color/colorAccent"
+        app:dotColor="@color/colorBlanco"
         app:frameDelayMillis="10"
-        app:lineColor="@color/colorAccent"
+        app:lineColor="@color/colorBlanco"
         app:lineDistance="86dp"
         app:lineThickness="1dp"/>
 
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
-            app:tabTextColor="@color/colorAccent" />
+            app:tabTextColor="@color/colorBlanco" />
     </androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

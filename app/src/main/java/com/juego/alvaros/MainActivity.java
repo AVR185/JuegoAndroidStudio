@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.doctoror.particlesdrawable.ParticlesDrawable;
 import com.google.android.material.tabs.TabLayout;
 import com.juego.alvaros.Juego.BucleJuego;
+import com.juego.alvaros.vistas.dialogos.DialogoReinicio;
 import com.juego.alvaros.vistas.FragmentAjustes;
 import com.juego.alvaros.vistas.FragmentCreditos;
 import com.juego.alvaros.vistas.FragmentMenuPrincipal;
@@ -33,7 +34,7 @@ import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
  * @version 1.0 18/12/2019
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements DialogoReinicio.OnSimpleDialogListener {
     //Atributos
     private final ParticlesDrawable mDrawable = new ParticlesDrawable(); //objeto del tipo ParticleDrawable para el fondo
     private static TabLayout tabLayout;
@@ -72,26 +73,59 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         mDrawable.start();
         introMusica();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         mDrawable.stop();
         mPlayer.stop();
     }
 
     //============ Eventos =============
+    @Override
+    public void onBackPressed(){
+     //   Intent intent = new Intent(this, MainActivity.class);
+     //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+     //   startActivity(intent);
+
+    //    Intent intent = getIntent();
+    //    finish();
+    //    startActivity(intent);
+        mPlayer.stop();
+        recreate();
+    }
+
+    //Control botones dialogo reinicio de juego
+    @Override
+    public void onPossitiveButtonClick() {
+        iniciarJuego();
+    }
+
+    @Override
+    public void onNegativeButtonClick() {
+        mPlayer.stop();
+        recreate();
+    }
+
+
     /**
-     * Metodo para iniciar una nueva partida
+     * Metodo que responde al evento del textview para iniciar juego
      * @param view view que llama a dicha acción
      */
+    public void botonNuevoJuego(View view) {
+        iniciarJuego();
+    }
+
+    /**
+     * Método con el que iniciamos un nuevo juego
+     */
     @SuppressLint("ClickableViewAccessibility")
-    public void inicioJuego(View view) {
+    public void iniciarJuego(){
         setContentView(R.layout.juego_layout);
         BucleJuego.setMaxFps(misPreferencias.getInt("fps", 30));
 
