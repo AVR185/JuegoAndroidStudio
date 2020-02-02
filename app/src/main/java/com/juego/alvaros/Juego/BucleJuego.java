@@ -3,9 +3,7 @@ package com.juego.alvaros.Juego;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
-import android.widget.SeekBar;
 
-import com.juego.alvaros.vistas.FragmentAjustes;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
@@ -29,8 +27,8 @@ public class BucleJuego extends Thread {
         this.surfaceHolder = surfaceHolder;
 
         //Comprobamos si el usuario ha modificado los FPS e inicializamos las variables
-        SeekBar seekBar = FragmentAjustes.getSeekBarFps();
-        MAX_FPS = (seekBar!=null)?seekBar.getProgress():30;
+        //SeekBar seekBar = FragmentAjustes.getSeekBarFps();
+        //MAX_FPS = (seekBar!=null)?seekBar.getProgress():30;
         TIEMPO_FRAME = 1000 / MAX_FPS;
     }
 
@@ -102,5 +100,9 @@ public class BucleJuego extends Thread {
 
     static int getFPS(){
         return MAX_FPS;
+    }
+
+    public static void setMaxFps(int maxFps) {
+        MAX_FPS = maxFps;
     }
 }

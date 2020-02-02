@@ -20,10 +20,8 @@
 
     <ListView
         android:id="@+id/idRanking"
-        android:layout_width="219dp"
-        android:layout_height="481dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="70dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

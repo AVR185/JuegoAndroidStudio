@@ -29,8 +29,8 @@
     <string name="fondo_animado">Fondo Animado:</string>
     <string name="autor_fondo">Yaroslav Mytkalyk</string>
     <string name="git_fondo">Github: https://github.com/Doctoror</string>
-    <string name="musica">Music:</string>
-    <string name="autor_musica">Name</string>
+    <string name="musica">Música:</string>
+    <string name="autor_musica">Nombre:</string>
     <string name="url_musica">URL</string>
 
     <!-- Texto Activity FragmentAjustes -->

@@ -14,12 +14,16 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.widget.ImageView;
 
+import com.juego.alvaros.BaseDatos.BDRanking;
 import com.juego.alvaros.MainActivity;
 import com.juego.alvaros.R;
 import com.juego.alvaros.bloques.Hexagono;
 import com.juego.alvaros.bloques.Rectangulo;
 import com.juego.alvaros.bloques.Cuadrado;
 import com.juego.alvaros.bloques.RectanguloX;
+import com.juego.alvaros.vistas.FragmentRanking;
+import com.juego.alvaros.vistas.FragmentSeleccionNivel;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,9 +48,9 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     private ArrayList<Rectangulo> listaBloques = new ArrayList<>();
 
     //============== Dificultad ===============
-    private int puntos = 0;
-    private static int nivel = 1;
     private final int PUNTOS_CAMBIOS_NIVEL = 1000;
+    private static int nivel = FragmentSeleccionNivel.getNivel()==0?1:FragmentSeleccionNivel.getNivel();
+    private int puntos = nivel==1?0:nivel*PUNTOS_CAMBIOS_NIVEL;
     TimerTask temporizador;
     Timer timer;
 
@@ -72,7 +76,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
                 puntos += 50;
             }
         };
-        timer.scheduleAtFixedRate(temporizador, 0, 1000);
+        timer.scheduleAtFixedRate(temporizador, 1000, 1000);
     }
 
     //Metodos que hay que implementar de la interfaz
@@ -174,6 +178,8 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     public void finalizarJuego(){
         bucle.fin();
+        if(FragmentRanking.mejorPuntuacion(puntos))
+            FragmentRanking.addRegistro("nombre", puntos, nivel);
     }
 
     //No lo implementa el libro pero Android Studio te obliga
@@ -233,4 +239,8 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public static int getNivel(){ return nivel; }
+
+    public static void setNivel(int nivel) {
+        Juego.nivel = nivel;
+    }
 }

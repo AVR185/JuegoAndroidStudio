@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.media.MediaPlayer;
@@ -19,14 +20,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.doctoror.particlesdrawable.ParticlesDrawable;
 import com.google.android.material.tabs.TabLayout;
+import com.juego.alvaros.Juego.BucleJuego;
 import com.juego.alvaros.vistas.FragmentAjustes;
 import com.juego.alvaros.vistas.FragmentCreditos;
 import com.juego.alvaros.vistas.FragmentMenuPrincipal;
 import com.juego.alvaros.vistas.FragmentRanking;
 import com.juego.alvaros.vistas.FragmentSeleccionNivel;
-
 import java.util.Objects;
-
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 
 /**
@@ -40,12 +40,15 @@ public class MainActivity extends AppCompatActivity{
     //MusicaIntro
     private static MediaPlayer mPlayer;
     //Bolas del juego
-    private static ImageView Blue_Ball  ;
-    private static ImageView Red_Ball ;
+    private static ImageView Blue_Ball;
+    private static ImageView Red_Ball;
 
     //Medidas de la pantalla
     private static int ancho;
     private static int alto;
+
+    //Cargamos preferencias
+    private SharedPreferences misPreferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity{
     @SuppressLint("ClickableViewAccessibility")
     public void inicioJuego(View view) {
         setContentView(R.layout.juego_layout);
+        BucleJuego.setMaxFps(misPreferencias.getInt("fps", 30));
 
         final ImageView Controller_Blue = findViewById(R.id.Blue_Control);
         final ImageView Controller_Red = findViewById(R.id.Red_Control);
@@ -255,10 +259,12 @@ public class MainActivity extends AppCompatActivity{
     /**
      * Método que implementa la musica del menu
      */
-
     public void introMusica(){
         mPlayer = MediaPlayer.create(this,R.raw.intromenu);
-
+        misPreferencias = getSharedPreferences("prefs",MODE_PRIVATE);
+        int progress = misPreferencias.getInt("musica", 100);
+        float volumen = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
+        mPlayer.setVolume(volumen, volumen);
         mPlayer.start();
     }
 
@@ -277,16 +283,6 @@ public class MainActivity extends AppCompatActivity{
             default:
                 Toast.makeText(getApplicationContext(), "Vuelva a intentarlo", Toast.LENGTH_LONG).show();
         }
-    }
-
-    //Getter
-    public static TabLayout getTabLayout(){
-        return tabLayout;
-    }
-
-    //Getter para la el elemento de musica de la intro..
-    public static MediaPlayer getmPlayer() {
-        return mPlayer;
     }
 
     /**
@@ -344,6 +340,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    //================== Getters ==================
     public static int getAlto(){
         return alto;
     }
@@ -358,5 +355,14 @@ public class MainActivity extends AppCompatActivity{
 
     public static ImageView getRed_Ball() {
         return Red_Ball;
+    }
+
+    public static TabLayout getTabLayout(){
+        return tabLayout;
+    }
+
+    //Getter para la el elemento de musica de la intro..
+    public static MediaPlayer getmPlayer() {
+        return mPlayer;
     }
 }
