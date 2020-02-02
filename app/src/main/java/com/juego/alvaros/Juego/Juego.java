@@ -160,11 +160,16 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean colisiones (Rectangulo rect, ImageView bola){
-        int alto_mayor = (bola.getHeight()>=rect.getAlto())? bola.getHeight():rect.getAlto();
-        int ancho_mayor= (bola.getWidth()>=rect.getAncho())? bola.getWidth():rect.getAncho();
+        /*
+        int alto_mayor = (bola.getHeight()>rect.getAlto())? bola.getHeight():rect.getAlto();
+        int ancho_mayor= (bola.getWidth()>rect.getAncho())? bola.getWidth():rect.getAncho();
         int diferenciaX= Math.abs(rect.getCoordenada_x()- (int)bola.getX());
         int diferenciaY= Math.abs(rect.getCoordenada_y()- (int)bola.getY());
         return (diferenciaX<ancho_mayor&&diferenciaY<alto_mayor);
+        */
+        boolean cond1 = bola.getX()+10 < rect.getCoordenada_x() + rect.getAncho() && bola.getX()+bola.getWidth()-10 > rect.getCoordenada_x();
+        boolean cond2 = bola.getY()+10 < rect.getCoordenada_y() + rect.getAlto() && bola.getY()+bola.getHeight()-10 > rect.getCoordenada_y();
+        return cond1 && cond2;
     }
 
     public void finalizarJuego(){

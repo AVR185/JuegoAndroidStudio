@@ -5,7 +5,7 @@ import com.juego.alvaros.Juego.Juego;
 
 public class Hexagono extends Rectangulo {
     //Atributos
-    private int velocidad = 15;
+    private int velocidad = 5;
 
     public Hexagono(Juego j) {
         super(j);

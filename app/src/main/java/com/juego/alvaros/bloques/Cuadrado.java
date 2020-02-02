@@ -9,7 +9,7 @@ import com.juego.alvaros.Juego.Juego;
  */
 public class Cuadrado extends Rectangulo {
     //Atributos
-    private int velocidad = 30;
+    private int velocidad = 20;
 
     public Cuadrado(Juego juego){
         super(juego);
