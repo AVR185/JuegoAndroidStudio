@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.juego.alvaros.Juego.Juego;
 import com.juego.alvaros.R;
 
 /**
@@ -21,7 +23,7 @@ import com.juego.alvaros.R;
  */
 public class FragmentSeleccionNivel extends Fragment {
     //Atributos
-    private static int nivel;
+    private int nivel;
     private Context mContext;
 
     public FragmentSeleccionNivel() {
@@ -54,6 +56,7 @@ public class FragmentSeleccionNivel extends Fragment {
                 String texto = ((TextView)view).getText().toString();
                 String[] txtSeparado = texto.split(" ");
                 nivel = Integer.parseInt(txtSeparado[1]);
+                Juego.setNivel(nivel);
             }
         });
 
@@ -85,9 +88,5 @@ public class FragmentSeleccionNivel extends Fragment {
     public void onDetach() {
         super.onDetach();
         mContext = null;
-    }
-
-    public static int getNivel() {
-        return nivel;
     }
 }

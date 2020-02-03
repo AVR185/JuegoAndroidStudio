@@ -1,5 +1,6 @@
 package com.juego.alvaros.vistas.dialogos;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -7,14 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
 import com.juego.alvaros.Juego.Juego;
 import com.juego.alvaros.R;
+import com.juego.alvaros.vistas.FragmentRanking;
 
 public class DialogRegistroNombre extends DialogFragment {
     //Atributos
-    private EditText nick;
+    private EditText texto;
 
     @NonNull
     @Override
@@ -26,14 +30,16 @@ public class DialogRegistroNombre extends DialogFragment {
         View v = inflater.inflate(R.layout.dialog_registro_nombre, null);
         builder.setView(v);
 
+        texto = v.findViewById(R.id.idTextNick);
         Button aceptar = v.findViewById(R.id.idBotonRegistro);
-        nick = v.findViewById(R.id.idTextNick);
 
         aceptar.setOnClickListener(
             new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Juego.setNick(nick.getText().toString());
+                    String nick = texto.getText().toString();
+                    int numero = Juego.getPuntos();
+                    FragmentRanking.addRegistro(nick, numero, Juego.getNivel());
                     dismiss();
                 }
             }

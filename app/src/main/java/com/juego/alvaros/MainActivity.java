@@ -89,13 +89,6 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
     //============ Eventos =============
     @Override
     public void onBackPressed(){
-     //   Intent intent = new Intent(this, MainActivity.class);
-     //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-     //   startActivity(intent);
-
-    //    Intent intent = getIntent();
-    //    finish();
-    //    startActivity(intent);
         mPlayer.stop();
         recreate();
     }
@@ -111,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
         mPlayer.stop();
         recreate();
     }
-
 
     /**
      * Metodo que responde al evento del textview para iniciar juego

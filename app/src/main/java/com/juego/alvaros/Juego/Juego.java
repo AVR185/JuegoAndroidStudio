@@ -49,21 +49,25 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     //============== Dificultad ===============
     private final int PUNTOS_CAMBIOS_NIVEL = 1000;
-    private static int nivel = FragmentSeleccionNivel.getNivel()==0?1:FragmentSeleccionNivel.getNivel();
-    private int puntos = nivel==1?0:nivel*PUNTOS_CAMBIOS_NIVEL;
-    //numero enemigos por minuto
-    private int bloquesMinuto = 50 + 10*nivel;
+    private static int nivel;
+    private int puntos;
+    private int bloquesMinuto;//numero enemigos por minuto
+
     TimerTask temporizador;
     Timer timer;
 
-    private static String nick;
     private FragmentManager fragmentManager;
+    private static int puntosActuales;   //Son los valores que guardaremos ya que con el juego parado el tiempo
+    private static int nivelActual;      // que tardes en escribir nombre, los puntos se siguen sumando
 
     //Constructor de la clase
     public Juego(Context context, AttributeSet attrs) {
         super(context, attrs);
         //Activity activity = (Activity) context;
         fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+        puntos = (nivel==1)?0:nivel*PUNTOS_CAMBIOS_NIVEL;
+        bloquesMinuto = 50 + 10*nivel;
 
         //Hacemos el fondo transparente para que se vea el fondo animado
         SurfaceView surfaceView = findViewById(R.id.idGameView);
@@ -75,7 +79,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         holder.addCallback(this);
         cargaRectangulos();
 
-        //Cada 10 segundos sumamos 20 puntos a la puntuacion
+        //Cada 1 segundos sumamos 50 puntos a la puntuacion
         timer = new Timer();
         temporizador = new TimerTask() {
             @Override
@@ -83,11 +87,10 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
                 puntos += 50;
             }
         };
-        timer.scheduleAtFixedRate(temporizador, 1000, 1000);
+        timer.scheduleAtFixedRate(temporizador, 0, 1000);
     }
 
     //Metodos que hay que implementar de la interfaz
-
     /**
      *
      * @param surfaceHolder parametro necesario para acceder al canvas de la SurfaceView
@@ -123,7 +126,6 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         for(int i = 0;i<listaBloques.size(); i++){
             listaBloques.get(i).ActualizarCoordenadas();
 
-            listaBloques.get(i).ActualizarCoordenadas();
             /*if(colisiones(listaBloques.get(i),MainActivity.getBlue_Ball())){
                 Log.i("COL","Impacto de bola Azul");
             }
@@ -171,13 +173,6 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean colisiones (Rectangulo rect, ImageView bola){
-        /*
-        int alto_mayor = (bola.getHeight()>rect.getAlto())? bola.getHeight():rect.getAlto();
-        int ancho_mayor= (bola.getWidth()>rect.getAncho())? bola.getWidth():rect.getAncho();
-        int diferenciaX= Math.abs(rect.getCoordenada_x()- (int)bola.getX());
-        int diferenciaY= Math.abs(rect.getCoordenada_y()- (int)bola.getY());
-        return (diferenciaX<ancho_mayor&&diferenciaY<alto_mayor);
-        */
         boolean cond1 = bola.getX()+10 < rect.getCoordenada_x() + rect.getAncho() && bola.getX()+bola.getWidth()-10 > rect.getCoordenada_x();
         boolean cond2 = bola.getY()+10 < rect.getCoordenada_y() + rect.getAlto() && bola.getY()+bola.getHeight()-10 > rect.getCoordenada_y();
         return cond1 && cond2;
@@ -185,16 +180,16 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     public void finalizarJuego(){
         bucle.fin();
+        puntosActuales = puntos;
+        nivelActual= nivel;
         //Mostramos el dialogo de fin de juego
         DialogoReinicio reinicio = new DialogoReinicio();
         reinicio.show(Objects.requireNonNull(fragmentManager),"Reinicio");
 
         //Mostramos o no el dialogo para guardar el nick
         DialogRegistroNombre dialogo = new DialogRegistroNombre();;
-        if(FragmentRanking.mejorPuntuacion(puntos)){
+        if(FragmentRanking.mejorPuntuacion(puntos))
             dialogo.show(Objects.requireNonNull(fragmentManager),"Registro nombre");
-            FragmentRanking.addRegistro(nick, puntos, nivel);
-        }
     }
 
     //No lo implementa el libro pero Android Studio te obliga
@@ -241,6 +236,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    //=============== Getters y Setters ========================
     public static Bitmap getRectangulo(){
         return rectangulo;
     }
@@ -253,13 +249,9 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         return hexagono;
     }
 
-    public static int getNivel(){ return nivel; }
+    public static void setNivel(int nivel) { Juego.nivel = nivel; }
 
-    public static void setNivel(int nivel) {
-        Juego.nivel = nivel;
-    }
+    public static int getNivel(){ return nivelActual; }
 
-    public static void setNick(String nick) {
-        Juego.nick = nick;
-    }
+    public static int getPuntos() { return puntosActuales; }
 }
