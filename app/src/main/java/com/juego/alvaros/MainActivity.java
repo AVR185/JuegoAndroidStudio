@@ -7,10 +7,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
     private static TabLayout tabLayout;
     //MusicaIntro
     private static MediaPlayer mPlayer;
+    private static SoundPool soundPool; //Efectos de sonido
+    private static int[] sonidos;
     //Bolas del juego
     private static ImageView Blue_Ball;
     private static ImageView Red_Ball;
@@ -70,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
         inicializarTab();
         //Música del Menu
         introMusica();
+        //Cargaos los efectos de sonido
+        sonidosFx();
     }
 
     @Override
@@ -89,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
     //============ Eventos =============
     @Override
     public void onBackPressed(){
-        mPlayer.stop();
         recreate();
     }
 
@@ -101,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
 
     @Override
     public void onNegativeButtonClick() {
-        mPlayer.stop();
         recreate();
     }
 
@@ -286,12 +291,30 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
      * Método que implementa la musica del menu
      */
     public void introMusica(){
-        mPlayer = MediaPlayer.create(this,R.raw.intromenu);
-        misPreferencias = getSharedPreferences("prefs",MODE_PRIVATE);
-        int progress = misPreferencias.getInt("musica", 100);
-        float volumen = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
-        mPlayer.setVolume(volumen, volumen);
-        mPlayer.start();
+        if(mPlayer == null || !mPlayer.isPlaying()){
+            mPlayer = MediaPlayer.create(this,R.raw.intromenu);
+            misPreferencias = getSharedPreferences("prefs",MODE_PRIVATE);
+            int progress = misPreferencias.getInt("musica", 100);
+            float volumen = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
+            mPlayer.setVolume(volumen, volumen);
+            mPlayer.start();
+        }
+    }
+
+    //Los efectos de sonido los cargamos aqui para que le de tiempo a SoundPool a cargar, si no puede dar problemas con los primeros sonidos
+    public void sonidosFx(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(15)
+                    .build();
+        }else{
+            soundPool = new SoundPool(15, AudioManager.STREAM_MUSIC, 0);
+        }
+        int comienzo = soundPool.load(this, R.raw.comienzo, 3);
+        int impacto = soundPool.load(this, R.raw.colision, 3);
+        int enemigo = soundPool.load(this, R.raw.enemigos, 1);
+
+        sonidos = new int[]{comienzo, enemigo, impacto};
     }
 
     /**
@@ -391,4 +414,8 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
     public static MediaPlayer getmPlayer() {
         return mPlayer;
     }
+
+    public static SoundPool getSoundPool(){ return soundPool;}
+
+    public static int[] getEfectosSonido(){ return  sonidos; }
 }

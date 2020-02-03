@@ -8,6 +8,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -24,7 +27,7 @@ import com.juego.alvaros.bloques.RectanguloX;
 import com.juego.alvaros.vistas.dialogos.DialogRegistroNombre;
 import com.juego.alvaros.vistas.dialogos.DialogoReinicio;
 import com.juego.alvaros.vistas.FragmentRanking;
-import com.juego.alvaros.vistas.FragmentSeleccionNivel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Timer;
@@ -56,9 +59,13 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     TimerTask temporizador;
     Timer timer;
 
-    private FragmentManager fragmentManager;
+    private FragmentManager fragmentManager; //Variable necesaria para mostrar los DialogFragment
     private static int puntosActuales;   //Son los valores que guardaremos ya que con el juego parado el tiempo
     private static int nivelActual;      // que tardes en escribir nombre, los puntos se siguen sumando
+
+    //Efectos de sonido
+    private SoundPool soundPool;
+    private int comienzo, impacto, enemigo;
 
     //Constructor de la clase
     public Juego(Context context, AttributeSet attrs) {
@@ -77,7 +84,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
         holder = getHolder();
         holder.addCallback(this);
-        cargaRectangulos();
+        cargarBloques(); //Cargamos las figuras
 
         //Cada 1 segundos sumamos 50 puntos a la puntuacion
         timer = new Timer();
@@ -88,6 +95,10 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
             }
         };
         timer.scheduleAtFixedRate(temporizador, 0, 1000);
+
+        //Cuando comienza el juego reproducimos el sonido correspondiente
+        soundPool = MainActivity.getSoundPool();
+        soundPool.play(MainActivity.getEfectosSonido()[0], 1, 1, 3, 0, 1);
     }
 
     //Metodos que hay que implementar de la interfaz
@@ -119,6 +130,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     public void actualizar(){
         if(frames_new_bloque ==0){
             crearBloque();
+            soundPool.play(MainActivity.getEfectosSonido()[1], 1, 1, 1, 0, 1); //sonido cuando se crea un enemigo
             frames_new_bloque = BucleJuego.getFPS()*60/ bloquesMinuto;
         }
         frames_new_bloque--;
@@ -133,6 +145,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
                 Log.i("COL","Impacto de bola Roja");
             }*/
             if(colisiones(listaBloques.get(i), MainActivity.getRed_Ball()) || colisiones(listaBloques.get(i),MainActivity.getBlue_Ball())){
+                soundPool.play(MainActivity.getEfectosSonido()[2], 1, 1, 3, 0, 1); //sonido cuando hay un impacto
                 finalizarJuego();
             }
 
@@ -216,7 +229,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    public void cargaRectangulos(){
+    public void cargarBloques(){
         frames_new_bloque = BucleJuego.getFPS() *60/ bloquesMinuto;
         rectangulo = BitmapFactory.decodeResource(getResources(), R.drawable.rectangulo);
         cuadrado = BitmapFactory.decodeResource(getResources(), R.drawable.cuadrado);

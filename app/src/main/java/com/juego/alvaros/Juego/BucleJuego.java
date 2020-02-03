@@ -26,9 +26,6 @@ public class BucleJuego extends Thread {
         this.juego = juego;
         this.surfaceHolder = surfaceHolder;
 
-        //Comprobamos si el usuario ha modificado los FPS e inicializamos las variables
-        //SeekBar seekBar = FragmentAjustes.getSeekBarFps();
-        //MAX_FPS = (seekBar!=null)?seekBar.getProgress():30;
         TIEMPO_FRAME = 1000 / MAX_FPS;
     }
 
