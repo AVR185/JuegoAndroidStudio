@@ -133,9 +133,9 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
 
         Controller_Blue.setOnTouchListener(new View.OnTouchListener()
         {
-            PointF DownPT = new PointF(); // Record Mouse Position When Pressed Down
-            PointF StartPT = new PointF(); // Record Start Position of 'img'
-            PointF StartPT_Ball = new PointF(); // Record Start Position of 'img'
+            PointF DownPT = new PointF(); // Guarda la posición del ratón cuando se presiona
+            PointF StartPT = new PointF(); // Guarda la posición inicial del controlador
+            PointF StartPT_Ball = new PointF(); // Guarda la posición inicial de la bola
 
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -151,11 +151,13 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
                         StartPT_Ball.set(Blue_Ball.getX(), Blue_Ball.getY());
                         break;
                     case MotionEvent.ACTION_DOWN :
+                        Controller_Blue.setImageAlpha(50); //hacemos el control semitransparente
                         DownPT.set( event.getX(), event.getY());
                         StartPT.set( Controller_Blue.getX(), Controller_Blue.getY());
                         StartPT_Ball.set(Blue_Ball.getX(), Blue_Ball.getY());
                         break;
                     case MotionEvent.ACTION_UP :
+                        Controller_Blue.setImageAlpha(255); //recupera su opacidad
                         v.performClick();
                         break;
                     default :
@@ -167,9 +169,9 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
 
         Controller_Red.setOnTouchListener(new View.OnTouchListener()
         {
-            PointF DownPT = new PointF(); // Record Mouse Position When Pressed Down
-            PointF StartPT = new PointF(); // Record Start Position of 'img'
-            PointF StartPT_Ball = new PointF(); // Record Start Position of 'img'
+            PointF DownPT = new PointF(); // Guarda la posición del ratón cuando se presiona
+            PointF StartPT = new PointF(); // Guarda la posición inicial del controlador
+            PointF StartPT_Ball = new PointF(); // Guarda la posición inicial de la bola
 
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -185,11 +187,13 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
                         StartPT_Ball.set(Red_Ball.getX(), Red_Ball.getY());
                         break;
                     case MotionEvent.ACTION_DOWN :
+                        Controller_Red.setImageAlpha(50); //hacemos el control semitransparente
                         DownPT.set( event.getX(), event.getY() );
                         StartPT.set( Controller_Red.getX(), Controller_Red.getY() );
                         StartPT_Ball.set(Red_Ball.getX(), Red_Ball.getY());
                         break;
                     case MotionEvent.ACTION_UP :
+                        Controller_Red.setImageAlpha(255); //recupera su opacidad
                         v.performClick();
                         break;
                     default :
