@@ -294,9 +294,9 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
         if(mPlayer == null || !mPlayer.isPlaying()){
             mPlayer = MediaPlayer.create(this,R.raw.intromenu);
             misPreferencias = getSharedPreferences("prefs",MODE_PRIVATE);
-            int progress = misPreferencias.getInt("musica", 100);
-            float volumen = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
-            mPlayer.setVolume(volumen, volumen);
+            int volumen = misPreferencias.getInt("musica", 99);
+            float conversor = (float) (1 - (Math.log(100 - volumen) / Math.log(100)));
+            mPlayer.setVolume(conversor, conversor);
             mPlayer.start();
         }
     }

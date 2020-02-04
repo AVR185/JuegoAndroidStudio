@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        app:dotColor="@android:color/holo_green_light"
+        app:dotColor="@color/colorEtiqueta2"
         app:frameDelayMillis="10"
-        app:lineColor="@android:color/holo_green_light"
+        app:lineColor="@color/colorEtiqueta2"
         app:lineDistance="86dp"
         app:lineThickness="1dp" />
 

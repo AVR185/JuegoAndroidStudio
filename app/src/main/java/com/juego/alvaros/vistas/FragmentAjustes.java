@@ -23,7 +23,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class FragmentAjustes extends Fragment implements SeekBar.OnSeekBarChangeListener{
     private TabLayout tabLayout;
     private TextView textViewFps, textViewMusica, textViewFx;
-    private static SeekBar seekBarFps, seekBarMusica, seekBarFx;
+    private SeekBar seekBarFps, seekBarMusica, seekBarFx;
     private SharedPreferences misPreferencias;
 
     public FragmentAjustes() {
@@ -60,9 +60,9 @@ public class FragmentAjustes extends Fragment implements SeekBar.OnSeekBarChange
         textViewFps = view.findViewById(R.id.idTextViewFps);
         textViewFps.setText(String.format(Locale.FRENCH,"%d FPS" , misPreferencias.getInt("fps", 30)));
         textViewMusica = view.findViewById(R.id.idTextViewMusica);
-        textViewMusica.setText(String.format(Locale.FRENCH,"%d%%" , misPreferencias.getInt("musica", 100)));
+        textViewMusica.setText(String.format(Locale.FRENCH,"%d%%" , misPreferencias.getInt("fx", 100)==99?100:misPreferencias.getInt("musica", 100)));
         textViewFx = view.findViewById(R.id.idTextViewFx);
-        textViewFx.setText(String.format(Locale.FRENCH,"%d%%" , misPreferencias.getInt("fx", 100)));
+        textViewFx.setText(String.format(Locale.FRENCH,"%d%%" , misPreferencias.getInt("fx", 100)==99?100:misPreferencias.getInt("fx", 100)));
 
         seekBarFps.setOnSeekBarChangeListener(this);
         seekBarMusica.setOnSeekBarChangeListener(this);
@@ -78,9 +78,10 @@ public class FragmentAjustes extends Fragment implements SeekBar.OnSeekBarChange
         //Se crea el objeto editor que permite modificar los valores del objeto misPreferencias
         SharedPreferences.Editor editor = misPreferencias.edit();
 
+        //Para que no salga infinito en la conversion del valor 100 a un volumen entre 1 y 0 con log, si el volumen es 100 lo transformamos en 99
         int fps = seekBarFps.getProgress();
-        int volumenMusica = seekBarMusica.getProgress();
-        int volumenFx = seekBarFx.getProgress();
+        int volumenMusica = seekBarMusica.getProgress()==100?99:seekBarMusica.getProgress();
+        int volumenFx = seekBarFx.getProgress()==100?99:seekBarFx.getProgress();
 
         //Se crea o modifican los pares nombre/valor para las preferencias
         editor.putInt("fps", fps);
@@ -101,7 +102,8 @@ public class FragmentAjustes extends Fragment implements SeekBar.OnSeekBarChange
             case R.id.idSeekBarMusica:
                 textViewMusica.setText(String.format(Locale.FRENCH,"%d%%", progress));
                 //Controlamos el volumen del menu principal
-                float volumen = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
+                int conversor = progress==100?99:progress;
+                float volumen = (float) (1 - (Math.log(100 - conversor) / Math.log(100)));
                 MainActivity.getmPlayer().setVolume(volumen,volumen);
                 break;
             case R.id.idSeekBarFx:

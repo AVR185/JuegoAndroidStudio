@@ -1,6 +1,7 @@
 package com.juego.alvaros.Juego;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,9 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
-import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -27,11 +26,12 @@ import com.juego.alvaros.bloques.RectanguloX;
 import com.juego.alvaros.vistas.dialogos.DialogRegistroNombre;
 import com.juego.alvaros.vistas.dialogos.DialogoReinicio;
 import com.juego.alvaros.vistas.FragmentRanking;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * @author Alvaro del Rio, Alvaro Santillana, Alvaro Velasco
@@ -65,7 +65,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
     //Efectos de sonido
     private SoundPool soundPool;
-    private int comienzo, impacto, enemigo;
+    private float conversor; //obtenemos el volumen guardado para los Fx
 
     //Constructor de la clase
     public Juego(Context context, AttributeSet attrs) {
@@ -73,6 +73,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         //Activity activity = (Activity) context;
         fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
+        nivel = nivel==0?1:nivel;
         puntos = (nivel==1)?0:nivel*PUNTOS_CAMBIOS_NIVEL;
         bloquesMinuto = 50 + 10*nivel;
 
@@ -98,7 +99,11 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
         //Cuando comienza el juego reproducimos el sonido correspondiente
         soundPool = MainActivity.getSoundPool();
-        soundPool.play(MainActivity.getEfectosSonido()[0], 1, 1, 3, 0, 1);
+        SharedPreferences misPreferencias = context.getSharedPreferences("prefs",MODE_PRIVATE);
+        int volumen = misPreferencias.getInt("fx", 99);
+        conversor = (float) (1 - (Math.log(100 - volumen) / Math.log(100)));
+        //Sonido cuando se comienza una partida
+        soundPool.play(MainActivity.getEfectosSonido()[0], conversor, conversor, 3, 0, 1);
     }
 
     //Metodos que hay que implementar de la interfaz
@@ -130,7 +135,8 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
     public void actualizar(){
         if(frames_new_bloque ==0){
             crearBloque();
-            soundPool.play(MainActivity.getEfectosSonido()[1], 1, 1, 1, 0, 1); //sonido cuando se crea un enemigo
+            //sonido cuando se crea un enemigo
+            soundPool.play(MainActivity.getEfectosSonido()[1], conversor, conversor, 1, 0, 1);
             frames_new_bloque = BucleJuego.getFPS()*60/ bloquesMinuto;
         }
         frames_new_bloque--;
@@ -145,7 +151,8 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
                 Log.i("COL","Impacto de bola Roja");
             }*/
             if(colisiones(listaBloques.get(i), MainActivity.getRed_Ball()) || colisiones(listaBloques.get(i),MainActivity.getBlue_Ball())){
-                soundPool.play(MainActivity.getEfectosSonido()[2], 1, 1, 3, 0, 1); //sonido cuando hay un impacto
+                //sonido cuando hay un impacto
+                soundPool.play(MainActivity.getEfectosSonido()[2], conversor, conversor, 3, 0, 1);
                 finalizarJuego();
             }
 
@@ -176,7 +183,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
             //Dibujamos la puntuación y el nivel por pantalla
             Paint myPaint = new Paint();
             myPaint.setTextSize(50);
-            myPaint.setColor(Color.GREEN);
+            myPaint.setColor(Color.parseColor("#FF80AB"));
             canvas.drawText("Puntos: " + puntos + " - Nivel: " + nivel, 50, 50, myPaint);
 
             for(Rectangulo r : listaBloques){
