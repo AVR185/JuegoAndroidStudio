@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
      */
     public void introMusica(){
         if(mPlayer == null || !mPlayer.isPlaying()){
-            mPlayer = MediaPlayer.create(this,R.raw.intromenu);
+            mPlayer = MediaPlayer.create(this,R.raw.intromenuf);
             misPreferencias = getSharedPreferences("prefs",MODE_PRIVATE);
             int volumen = misPreferencias.getInt("musica", 99);
             float conversor = (float) (1 - (Math.log(100 - volumen) / Math.log(100)));
