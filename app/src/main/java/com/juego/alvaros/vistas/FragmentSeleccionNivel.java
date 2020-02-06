@@ -66,7 +66,7 @@ public class FragmentSeleccionNivel extends Fragment {
     private String[] obtenerNiveles(){
         String[] elementos;
         int max = FragmentRanking.obtenerNiveles();
-        if (max != 1){
+        if (max > 1){
             elementos = new String[max];
             for (int i = 1; i<=max; i++){
                 elementos[i-1]="Nivel "+i;

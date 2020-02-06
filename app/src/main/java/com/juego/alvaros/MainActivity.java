@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements DialogoReinicio.O
     @SuppressLint("ClickableViewAccessibility")
     public void iniciarJuego(){
         setContentView(R.layout.juego_layout);
-        BucleJuego.setMaxFps(misPreferencias.getInt("fps", 30));
+        BucleJuego.setMaxFps(misPreferencias.getInt("fps", 45));
 
         final ImageView Controller_Blue = findViewById(R.id.Blue_Control);
         final ImageView Controller_Red = findViewById(R.id.Red_Control);

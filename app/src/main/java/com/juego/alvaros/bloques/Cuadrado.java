@@ -9,7 +9,7 @@ import com.juego.alvaros.Juego.Juego;
  */
 public class Cuadrado extends Rectangulo {
     //Atributos
-    private int velocidad = 20;
+    private int velocidad = 20 * altoPantalla/1920;
 
     public Cuadrado(Juego juego){
         super(juego);
@@ -30,7 +30,7 @@ public class Cuadrado extends Rectangulo {
     public void CalcularCoordenadas() {
         double x;
         x = Math.random();
-        coordenada_x =(int) Math.floor((anchoPantalla-80)*x);
+        coordenada_x =(int) Math.floor((anchoPantalla-ancho)*x);
         coordenada_y = 0;
     }
 }

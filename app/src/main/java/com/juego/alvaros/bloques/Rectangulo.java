@@ -23,11 +23,11 @@ public abstract class Rectangulo {
     public int direccion_x = 1;
     public int direccion_y = 1;
 
-    public int velocidad =10;
-
     //Ancho de pantalla de prueba
     public int anchoPantalla = MainActivity.getAncho();
     public int altoPantalla = MainActivity.getAlto();
+
+    public int velocidad =10 * altoPantalla/1920;
 
     //Constructor
     public Rectangulo(Juego j){

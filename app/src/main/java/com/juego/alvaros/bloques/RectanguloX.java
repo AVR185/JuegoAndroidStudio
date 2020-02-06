@@ -25,14 +25,14 @@ public class RectanguloX extends Rectangulo {
     public void CalcularCoordenadas(){
         double x;
         x = Math.random();
-        coordenada_x =(int) Math.floor((anchoPantalla-290)*x);
+        coordenada_x =(int) Math.floor((anchoPantalla-ancho)*x);
         coordenada_y = 0;
     }
 
     @Override
     public void ActualizarCoordenadas(){
         super.ActualizarCoordenadas();
-        if (coordenada_x <=0 ||coordenada_x >= anchoPantalla -280){
+        if (coordenada_x <=0 ||coordenada_x >= anchoPantalla-ancho){
             direccion_x = -direccion_x;
         }
     }

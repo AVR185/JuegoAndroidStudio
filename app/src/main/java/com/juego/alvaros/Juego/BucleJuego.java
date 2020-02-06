@@ -11,10 +11,8 @@ import android.view.SurfaceHolder;
  */
 public class BucleJuego extends Thread {
     //Atributos de la clase
-    //private final static int MAX_FPS = 30; //Frames por segundo deseados
     private static int MAX_FPS;
     private final static int MAX_FRAMES_SALTATOS = 5; //Maximo numero de frames que saltaremos
-    //private final static int TIEMPO_FRAME = 1000 / MAX_FPS; //El periodo de frames
     private static int TIEMPO_FRAME;
     private Juego juego;
     private boolean juegoEnEjecucion = true;
@@ -95,7 +93,7 @@ public class BucleJuego extends Thread {
         juegoEnEjecucion = false;
     }
 
-    static int getFPS(){
+    public static int getFPS(){
         return MAX_FPS;
     }
 

@@ -75,7 +75,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
 
         nivel = nivel==0?1:nivel;
         puntos = (nivel==1)?0:nivel*PUNTOS_CAMBIOS_NIVEL;
-        bloquesMinuto = 50 + 10*nivel;
+        bloquesMinuto = 50 * (MainActivity.getAlto()*MainActivity.getAncho())/(1920*1080) + 10*nivel;
 
         //Hacemos el fondo transparente para que se vea el fondo animado
         SurfaceView surfaceView = findViewById(R.id.idGameView);

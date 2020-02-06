@@ -53,12 +53,12 @@ public class FragmentAjustes extends Fragment implements SeekBar.OnSeekBarChange
         //Cargamos los valores guardados
         misPreferencias = Objects.requireNonNull(this.getActivity()).getSharedPreferences("prefs",MODE_PRIVATE);
         //Cargamos el valor en las seekBar
-        seekBarFps.setProgress(misPreferencias.getInt("fps", 30));
+        seekBarFps.setProgress(misPreferencias.getInt("fps", 45));
         seekBarMusica.setProgress(misPreferencias.getInt("musica", 100));
         seekBarFx.setProgress(misPreferencias.getInt("fx", 100));
         //Cargamos los valores en los textViews correspondientes
         textViewFps = view.findViewById(R.id.idTextViewFps);
-        textViewFps.setText(String.format(Locale.FRENCH,"%d FPS" , misPreferencias.getInt("fps", 30)));
+        textViewFps.setText(String.format(Locale.FRENCH,"%d FPS" , misPreferencias.getInt("fps", 45)));
         textViewMusica = view.findViewById(R.id.idTextViewMusica);
         textViewMusica.setText(String.format(Locale.FRENCH,"%d%%" , misPreferencias.getInt("fx", 100)==99?100:misPreferencias.getInt("musica", 100)));
         textViewFx = view.findViewById(R.id.idTextViewFx);
