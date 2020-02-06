@@ -62,4 +62,8 @@
     <!-- Descripción controladores -->
     <string name="controlador_azul">Joystick bola azul</string>
     <string name="controlador_rojo">Joystick bola roja</string>
+
+    <!-- Puntos-->
+    <string name="puntos">Puntos</string>
+    <string name="nivel">Nivel</string>
 </resources>

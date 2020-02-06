@@ -184,7 +184,7 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
             Paint myPaint = new Paint();
             myPaint.setTextSize(50);
             myPaint.setColor(Color.parseColor("#FF80AB"));
-            canvas.drawText("Puntos: " + puntos + " - Nivel: " + nivel, 50, 50, myPaint);
+            canvas.drawText(getResources().getString(R.string.puntos)+" " + puntos + " - "+getResources().getString(R.string.nivel)+": " + nivel, 50, 50, myPaint);
 
             for(Rectangulo r : listaBloques){
                 r.Dibujar(canvas);
