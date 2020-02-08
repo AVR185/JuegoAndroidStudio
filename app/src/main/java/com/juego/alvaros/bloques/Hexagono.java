@@ -7,12 +7,12 @@ public class Hexagono extends Rectangulo {
     //Atributos
     private int velocidad = 5 * altoPantalla/1920;
 
-    public Hexagono(Juego j) {
-        super(j);
+    public Hexagono(Juego j, int nivel) {
+        super(j, nivel);
         this.figura = Juego.getHexagono();
         this.alto = this.figura.getHeight();
         this.ancho = this.figura.getWidth();
-        this.setVelocidad(velocidad + (Juego.getNivel()*2));
+        this.setVelocidad(this.velocidad + (nivel*2));
         this.setDireccion_y((Math.random()>=0.5)? 1:-1);
     }
 

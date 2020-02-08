@@ -11,13 +11,13 @@ public class Cuadrado extends Rectangulo {
     //Atributos
     private int velocidad = 20 * altoPantalla/1920;
 
-    public Cuadrado(Juego juego){
-        super(juego);
+    public Cuadrado(Juego juego, int nivel){
+        super(juego, nivel);
         this.figura = Juego.getCuadrado();
         this.alto = this.figura.getHeight();
         this.ancho = this.figura.getWidth();
         this.setDireccion_x(0);
-        this.setVelocidad(velocidad + (Juego.getNivel()*2));
+        this.setVelocidad(this.velocidad + (nivel*2));
     }
 
     //Metodo necesita el primer argumento

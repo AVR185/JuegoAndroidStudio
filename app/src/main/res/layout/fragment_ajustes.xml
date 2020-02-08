@@ -34,7 +34,7 @@
     <SeekBar
         android:id="@+id/idSeekBarFps"
         android:layout_width="200dp"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:indeterminate="false"
         android:max="75"
         android:min="15"

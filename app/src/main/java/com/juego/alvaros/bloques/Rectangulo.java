@@ -30,13 +30,13 @@ public abstract class Rectangulo {
     public int velocidad =10 * altoPantalla/1920;
 
     //Constructor
-    public Rectangulo(Juego j){
+    public Rectangulo(Juego j, int nivel){
         juego = j;
         figura = Juego.getRectangulo();
         alto = figura.getHeight();
         ancho = figura.getWidth();
         CalcularCoordenadas();
-        this.setVelocidad(velocidad + (Juego.getNivel()*2));
+        this.setVelocidad(velocidad + (nivel*2));
     }
 
     public void ActualizarCoordenadas(){

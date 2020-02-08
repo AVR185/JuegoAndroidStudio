@@ -248,11 +248,11 @@ public class Juego extends SurfaceView implements SurfaceHolder.Callback {
         double numero = Math.random();
 
         if (numero >= 0.5) {
-            listaBloques.add(new RectanguloX(this));
+            listaBloques.add(new RectanguloX(this, nivel));
         } else if(numero > 0.2 && numero < 0.5) {
-            listaBloques.add(new Cuadrado(this));
+            listaBloques.add(new Cuadrado(this, nivel));
         }else {
-            listaBloques.add(new Hexagono(this));
+            listaBloques.add(new Hexagono(this, nivel));
         }
     }
 

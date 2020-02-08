@@ -10,8 +10,8 @@ import com.juego.alvaros.Juego.Juego;
  */
 public class RectanguloX extends Rectangulo {
 
-    public RectanguloX(Juego j){
-        super(j);
+    public RectanguloX(Juego j, int nivel){
+        super(j, nivel);
         this.setDireccion_x((Math.random()>=0.5)? 1:-1);
     }
 
